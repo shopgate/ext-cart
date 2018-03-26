@@ -7,45 +7,14 @@ module.exports = function (context, input, cb) {
   context.storage.device.get('cart', cart, (err) => {
     if (err) cb(err)
 
-
-    const isOrderable = true
-    const isTaxIncluded = false
     const currency = context.config.currency
-    const messages = []
-    const text = {
-      legalText: context.config.legalText,
-      legalInfo: context.config.legalInfo
-    }
     const cartItems = [
       mapProduct({})
     ]
-    const totals = [
-      {
-        label: null,
-        amount: 0,
-        type: 'subTotal'
-      },
-      {
-        label: null,
-        amount: 0,
-        type: 'grandTotal'
-      }
-    ]
-    const flags = {
-      orderable: isOrderable,
-      taxIncluded: isTaxIncluded,
-      coupons: false
-    }
 
     return cb(null, {
-      isOrderable,
-      isTaxIncluded,
       currency,
-      messages,
-      text,
-      cartItems,
-      totals,
-      flags
+      cartItems
     })
   })
 }

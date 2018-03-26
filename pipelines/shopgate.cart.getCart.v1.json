@@ -52,7 +52,7 @@
       {
         "type": "extension",
         "id": "@shopgate/cart",
-        "path": "@shopgate/cart/cart/updateCartItems.js",
+        "path": "@shopgate/cart/cart/updateCartItemsInfo.js",
         "input": [
           {"key": "cartItems", "id": "1060"},
           {"key": "productsCollection", "id": "1022"}

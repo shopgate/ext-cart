@@ -11,6 +11,7 @@ describe('checkProducts', () => {
         }
       ]
     }
+    // noinspection JSCheckFunctionSignatures
     checkProducts({}, input, (err) => {
       assert.ifError(err)
       done()
@@ -26,6 +27,7 @@ describe('checkProducts', () => {
         }
       ]
     }
+    // noinspection JSCheckFunctionSignatures
     checkProducts({}, input, (err) => {
       assert.equal(err.code, 'EPRODUCTNOTFOUND')
       assert(err.message.endsWith('SG2'))
