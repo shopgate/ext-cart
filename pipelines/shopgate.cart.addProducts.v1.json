@@ -1,0 +1,65 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.cart.addProducts.v1",
+    "public": true,
+    "input": [
+      {"key": "sgxsMeta", "id": "1000"},
+      {"key": "products", "id": "1020"}
+    ],
+    "output": [
+      {"key": "messages", "id": "1030", "optional": true}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/extractProductIds.js",
+        "input": [
+          {"key": "products", "id": "1020"}
+        ],
+        "output": [
+          {"key": "productIds", "id": "1021"}
+        ]
+      },
+      {
+        "type": "pipeline",
+        "id": "getProducts_v1",
+        "input": [
+          {"key": "sgxsMeta", "id": "1000"},
+          {"key": "productIds", "id": "1021"}
+        ],
+        "output": [
+          {"key": "productsCollection", "id": "1022"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/checkProducts.js",
+        "input": [
+          {"key": "productIds", "id": "1021"},
+          {"key": "productsCollection", "id": "1022"}
+        ],
+        "output": []
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/addProductsToCart_v1.js",
+        "input": [
+          {"key": "products", "id": "1020"}
+        ],
+        "output": [
+          {"key": "messages", "id": "1030", "optional": true}
+        ]
+      },
+      {
+        "type": "pipeline",
+        "id": "shopgate.cart.trackCartChangedEvent.v1",
+        "input": [],
+        "output": []
+      }
+    ]
+  }
+}

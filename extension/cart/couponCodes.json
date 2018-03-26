@@ -1,0 +1,22 @@
+[
+  {
+    "code": "10percent",
+    "type": "percent",
+    "value": 10
+  },
+  {
+    "code": "100percent",
+    "type": "percent",
+    "value": 100
+  },
+  {
+    "code": "10euro",
+    "type": "fixed",
+    "value": 10
+  },
+  {
+    "code": "100euro",
+    "type": "fixed",
+    "value": 100
+  }
+]
