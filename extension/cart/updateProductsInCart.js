@@ -19,6 +19,7 @@ module.exports = function (context, input, cb) {
       return cb()
     }
 
+    // TODO IF quantity is zero, remove item
     cart.forEach(cartItem => {
       input.CartItem.forEach(item => {
         if (item.CartItemId === cartItem.id) {

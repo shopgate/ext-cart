@@ -58,6 +58,10 @@
  * @property {number} quantity
  * @property {string} type
  * @property {CartItemOption[]} options
+ * @property {Object} price
+ * @property {number} price.unit
+ * @property {number} price.default full amount with quantity or striked price
+ * @property {number} price.special full amount with quantity when strike is given
  */
 
 /**

@@ -9,7 +9,9 @@ describe('getCartTotals', () => {
         productId: 'SG1',
         quantity: 1,
         type: 'product',
-        price: 0
+        price: {
+          default: 100
+        }
       }
     ]
   }
@@ -17,7 +19,8 @@ describe('getCartTotals', () => {
     // noinspection JSCheckFunctionSignatures
     getCartTotals({}, input, (err, res) => {
       assert.ifError(err)
-      assert.equal(res.totals.grandTotal, 0)
+      assert.equal(res.totals.total, 100)
+      assert.equal(res.totals.grandTotal, 100)
       done()
     })
   })
