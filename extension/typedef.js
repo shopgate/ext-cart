@@ -10,6 +10,7 @@
 /**
  * @typedef {Object} ExtensionConfig
  * @property {boolean} hasCoupons
+ * @property {boolean} allowMultipleCoupons
  * @property {string} currency
  * @property {string} legalText
  * @property {string} legalInfo

@@ -1,6 +1,6 @@
 const ProductNotFound = require('./ProductNotFound')
 
-  /**
+/**
  * Check if all products from getProducts step are present before adding them to a cart
  * @param {SDKContext} context
  *

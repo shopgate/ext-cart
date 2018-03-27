@@ -20,6 +20,7 @@ module.exports = function (context, input, cb) {
   }
 
   return cb(null, {
+    currency: context.config.currency,
     totals
   })
 }

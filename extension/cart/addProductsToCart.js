@@ -1,3 +1,4 @@
+const {PRODUCT} = require('./consts')
 /**
  * @typedef {Object} AddCartItem
  * @property {string} productId
@@ -22,10 +23,12 @@ module.exports = function (context, input, cb) {
     }
 
     // add type property
-    const addProducts = input.products.map(product => {
-      product.type = 'product'
-      return product
-    })
+    const addProducts = input.products
+      .filter(product => product.quantity > 0)
+      .map(product => {
+        product.type = PRODUCT
+        return product
+      })
 
     // Collect products to be added to a cart
     const productsToAdd = addProducts.filter(product => {
@@ -37,10 +40,10 @@ module.exports = function (context, input, cb) {
     })
 
     // add new products to cart
-    productsToAdd.map(product => addProductToCart(cart, product))
+    productsToAdd.forEach(product => addProductToCart(cart, product))
 
     // update products in cart
-    productsToUpdate.map(product => updateProductInCart(cart, product))
+    productsToUpdate.forEach(product => updateProductInCart(cart, product))
 
     context.storage.device.set('cart', cart, (err) => {
       if (err) cb(err)
@@ -72,6 +75,7 @@ function cartHasProduct(cart, product) {
  */
 function addProductToCart(cart, product) {
   product.id = getCartItemId(product)
+  // noinspection JSCheckFunctionSignatures : price will be added later
   cart.push(product)
 }
 
@@ -92,5 +96,5 @@ function updateProductInCart(cart, product) {
  * @param {AddCartItem} product
  */
 function getCartItemId(product) {
-  return product.productId
+  return `product_${product.productId}`.toLowerCase()
 }

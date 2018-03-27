@@ -26,4 +26,4 @@ describe('getEventData', () => {
       done()
     })
   })
-})``
+})

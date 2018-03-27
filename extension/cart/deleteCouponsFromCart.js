@@ -1,3 +1,4 @@
+const {COUPON} = require('./consts')
 /**
  * @param {SDKContext} context
  * @param {object} input
@@ -14,7 +15,7 @@ module.exports = function (context, input, cb) {
     }
 
     const cartChanged = cart.filter(item => {
-      if (item.type === 'coupon') {
+      if (item.type === COUPON) {
         return !input.couponCodes.includes(item.productId)
       }
       return true

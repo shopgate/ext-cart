@@ -15,6 +15,13 @@
       "value" : true
     }
   },
+  "allowMultipleCoupons" : {
+    "type" : "static",
+    "destination" : "backend",
+    "params" : {
+      "value" : false
+    }
+  },
   "legalText" : {
     "type" : "static",
     "destination" : "backend",
