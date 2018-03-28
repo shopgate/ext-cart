@@ -86,7 +86,7 @@ function addProductToCart(cart, product) {
 function updateProductInCart(cart, product) {
   cart.forEach(cartItem => {
     if (cartItem.productId === product.productId) {
-      cartItem.quantity = product.quantity
+      cartItem.quantity += product.quantity
     }
   })
 }

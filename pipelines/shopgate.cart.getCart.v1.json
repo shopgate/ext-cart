@@ -10,7 +10,6 @@
       {"key": "isOrderable", "id": "1010"},
       {"key": "isTaxIncluded", "id": "1020"},
       {"key": "currency", "id": "1030"},
-      {"key": "messages", "id": "1040", "optional": true},
       {"key": "text", "id": "1050"},
       {"key": "cartItems", "id": "1060"},
       {"key": "totals", "id": "1070"},
@@ -23,7 +22,6 @@
         "path": "@shopgate/cart/cart/getCartItems.js",
         "input": [],
         "output": [
-          {"key": "currency", "id": "1030"},
           {"key": "cartItems", "id": "1060"}
         ]
       },
@@ -32,7 +30,7 @@
         "id": "@shopgate/cart",
         "path": "@shopgate/cart/cart/extractProductIds.js",
         "input": [
-          {"key": "cartItems", "id": "1020"}
+          {"key": "products", "id": "1060"}
         ],
         "output": [
           {"key": "productIds", "id": "1021"}
@@ -40,13 +38,13 @@
       },
       {
         "type": "pipeline",
-        "id": "getProducts_v1",
+        "id": "shopgate.catalog.getProducts.v1",
         "input": [
           {"key": "sgxsMeta", "id": "1000"},
           {"key": "productIds", "id": "1021"}
         ],
         "output": [
-          {"key": "productsCollection", "id": "1022"}
+          {"key": "products", "id": "1022"}
         ]
       },
       {
@@ -55,7 +53,7 @@
         "path": "@shopgate/cart/cart/updateCartItemsInfo.js",
         "input": [
           {"key": "cartItems", "id": "1060"},
-          {"key": "productsCollection", "id": "1022"}
+          {"key": "products", "id": "1022"}
         ],
         "output": [
           {"key": "cartItems", "id": "1060"}
@@ -69,6 +67,7 @@
           {"key": "cartItems", "id": "1060"}
         ],
         "output": [
+          {"key": "currency", "id": "1030"},
           {"key": "totals", "id": "1070"}
         ]
       },

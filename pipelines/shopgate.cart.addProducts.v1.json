@@ -24,13 +24,13 @@
       },
       {
         "type": "pipeline",
-        "id": "getProducts_v1",
+        "id": "shopgate.catalog.getProducts.v1",
         "input": [
           {"key": "sgxsMeta", "id": "1000"},
           {"key": "productIds", "id": "1021"}
         ],
         "output": [
-          {"key": "productsCollection", "id": "1022"}
+          {"key": "products", "id": "1022"}
         ]
       },
       {
@@ -39,14 +39,14 @@
         "path": "@shopgate/cart/cart/checkProducts.js",
         "input": [
           {"key": "productIds", "id": "1021"},
-          {"key": "productsCollection", "id": "1022"}
+          {"key": "products", "id": "1022"}
         ],
         "output": []
       },
       {
         "type": "extension",
         "id": "@shopgate/cart",
-        "path": "@shopgate/cart/cart/addProductsToCart_v1.js",
+        "path": "@shopgate/cart/cart/addProductsToCart.js",
         "input": [
           {"key": "products", "id": "1020"}
         ],
@@ -57,7 +57,9 @@
       {
         "type": "pipeline",
         "id": "shopgate.cart.trackCartChangedEvent.v1",
-        "input": [],
+        "input": [
+          {"key": "sgxsMeta", "id": "1000"}
+        ],
         "output": []
       }
     ]

@@ -13,7 +13,7 @@
       {
         "type": "extension",
         "id": "@shopgate/cart",
-        "path": "@shopgate/cart/cart/deleteCouponsFromCart_v1.js",
+        "path": "@shopgate/cart/cart/deleteCouponsFromCart.js",
         "input": [
           {"key": "couponCodes", "id": "1020", "optional": true}
         ],
