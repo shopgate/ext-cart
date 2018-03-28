@@ -3,15 +3,14 @@ const {PRODUCT} = require('./consts')
  * @typedef {Object} AddCartItem
  * @property {string} productId
  * @property {number} quantity
- * @property {string} type
  * @property {string} id
- * @property {CartItemOption[]} options
  */
 
 /**
  * @param {SDKContext} context
  * @param {object} input
  * @param {AddCartItem[]} input.products
+ * @param {Object[]} input.productsCollection
  * @param {function} cb
  */
 module.exports = function (context, input, cb) {
@@ -22,13 +21,8 @@ module.exports = function (context, input, cb) {
       cart = []
     }
 
-    // add type property
-    const addProducts = input.products
-      .filter(product => product.quantity > 0)
-      .map(product => {
-        product.type = PRODUCT
-        return product
-      })
+    // Filter out zero quantity
+    const addProducts = input.products.filter(product => product.quantity > 0)
 
     // Collect products to be added to a cart
     const productsToAdd = addProducts.filter(product => {
@@ -40,7 +34,13 @@ module.exports = function (context, input, cb) {
     })
 
     // add new products to cart
-    productsToAdd.forEach(product => addProductToCart(cart, product))
+    productsToAdd.forEach(product => {
+      input.productsCollection.forEach((productInfo) => {
+        if (productInfo.id === product.productId) {
+          addProductToCart(cart, product, productInfo)
+        }
+      })
+    })
 
     // update products in cart
     productsToUpdate.forEach(product => updateProductInCart(cart, product))
@@ -62,7 +62,7 @@ function cartHasProduct (cart, product) {
 
   let existsInCart = false
   cart.forEach(cartItem => {
-    if (cartItem.productId === product.productId) {
+    if (cartItem.type === PRODUCT && cartItem.product.id === product.productId) {
       existsInCart = true
     }
   })
@@ -72,11 +72,31 @@ function cartHasProduct (cart, product) {
 /**
  * @param {Cart} cart
  * @param {AddCartItem} product
+ * @param {Object} productInfo single product from getProducts pipeline
  */
-function addProductToCart (cart, product) {
-  product.id = getCartItemId(product)
+function addProductToCart (cart, product, productInfo) {
+  const newCartItem = {
+    id: getCartItemId(product),
+    quantity: product.quantity,
+    type: PRODUCT,
+    product: {
+      id: productInfo.id,
+      name: productInfo.name,
+      featuredImageUrl: productInfo.featuredImageUrl,
+      price: {
+        unit: productInfo.price.unitPrice,
+        default: productInfo.price.unitPrice * product.quantity,
+        special: null
+      },
+      properties: [],
+      appliedDiscounts: [],
+      additionalInfo: []
+    },
+    coupon: null,
+    messages: []
+  }
   // noinspection JSCheckFunctionSignatures : price will be added later
-  cart.push(product)
+  cart.unshift(newCartItem)
 }
 
 /**
@@ -85,8 +105,9 @@ function addProductToCart (cart, product) {
  */
 function updateProductInCart (cart, product) {
   cart.forEach(cartItem => {
-    if (cartItem.productId === product.productId) {
+    if (cartItem.type === PRODUCT && cartItem.product.id === product.productId) {
       cartItem.quantity += product.quantity
+      cartItem.product.price.default = cartItem.quantity * cartItem.product.price.unit
     }
   })
 }

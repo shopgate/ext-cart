@@ -8,15 +8,16 @@ describe('deleteCouponsFromCart', () => {
   const cart = [
     {
       id: 'qwerty123',
-      productId: 'QWERTY123',
       quantity: 1,
       type: PRODUCT
     },
     {
       code: coupon.code,
       type: COUPON,
-      productId: coupon.code,
-      quantity: 1
+      quantity: 1,
+      coupon: {
+        code: coupon.code
+      }
     }
   ]
   const context = {
@@ -36,7 +37,6 @@ describe('deleteCouponsFromCart', () => {
     const expectedCart = [
       {
         id: 'qwerty123',
-        productId: 'QWERTY123',
         quantity: 1,
         type: PRODUCT
       }

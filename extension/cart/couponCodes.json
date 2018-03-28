@@ -10,12 +10,12 @@
     "value": 100
   },
   {
-    "code": "10euro",
+    "code": "10fixed",
     "type": "fixed",
     "value": 10
   },
   {
-    "code": "100euro",
+    "code": "100fixed",
     "type": "fixed",
     "value": 100
   }

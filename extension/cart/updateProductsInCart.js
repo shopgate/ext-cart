@@ -24,6 +24,7 @@ module.exports = function (context, input, cb) {
       input.CartItem.forEach(item => {
         if (item.CartItemId === cartItem.id) {
           cartItem.quantity = item.quantity
+          cartItem.product.price.default = cartItem.quantity * cartItem.product.price.unit
         }
       })
     })

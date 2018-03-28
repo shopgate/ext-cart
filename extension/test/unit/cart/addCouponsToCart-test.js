@@ -35,29 +35,35 @@ describe('addCouponsToCart', () => {
       cart[0],
       {
         id: `coupon_${coupon1.code}`.toLowerCase(),
-        code: coupon1.code,
-        type: COUPON,
-        description: coupon1.code,
-        label: coupon1.code,
-        productId: coupon1.code,
         quantity: 1,
-        savedPrice: {
-          type: coupon1.type,
-          value: coupon1.value
-        }
+        type: COUPON,
+        product: null,
+        coupon: {
+          code: coupon1.code,
+          description: null,
+          label: 'Coupon',
+          savedPrice: {
+            type: coupon1.type,
+            value: coupon1.value
+          }
+        },
+        messages: []
       },
       {
         id: `coupon_${coupon2.code}`.toLowerCase(),
-        code: coupon2.code,
-        type: COUPON,
-        description: coupon2.code,
-        label: coupon2.code,
-        productId: coupon2.code,
         quantity: 1,
-        savedPrice: {
-          type: coupon2.type,
-          value: coupon2.value
-        }
+        type: COUPON,
+        product: null,
+        coupon: {
+          code: coupon2.code,
+          description: null,
+          label: 'Coupon',
+          savedPrice: {
+            type: coupon2.type,
+            value: coupon2.value
+          }
+        },
+        messages: []
       }
     ]
     context.storage.device.set = (key, newCartArg, cb) => {
@@ -82,13 +88,8 @@ describe('addCouponsToCart', () => {
     const cartWithCoupon = [
       cart[0],
       {
-        code: 'other coupon',
-        type: COUPON,
-        quantity: 1,
-        savedPrice: {
-          type: 'fixed',
-          value: 10
-        }
+        id: 'other coupon',
+        type: COUPON
       }
     ]
     // only first coupon is applied
@@ -96,16 +97,19 @@ describe('addCouponsToCart', () => {
       cart[0],
       {
         id: `coupon_${coupon1.code}`.toLowerCase(),
-        code: coupon1.code,
-        type: COUPON,
-        description: coupon1.code,
-        label: coupon1.code,
-        productId: coupon1.code,
         quantity: 1,
-        savedPrice: {
-          type: coupon1.type,
-          value: coupon1.value
-        }
+        type: COUPON,
+        product: null,
+        coupon: {
+          code: coupon1.code,
+          description: null,
+          label: 'Coupon',
+          savedPrice: {
+            type: coupon1.type,
+            value: coupon1.value
+          }
+        },
+        messages: []
       }
     ]
     context.storage.device.get = (key, cb) => {

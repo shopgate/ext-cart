@@ -39,7 +39,7 @@
         "path": "@shopgate/cart/cart/checkProducts.js",
         "input": [
           {"key": "productIds", "id": "1021"},
-          {"key": "products", "id": "1022"}
+          {"key": "productsCollection", "id": "1022"}
         ],
         "output": []
       },
@@ -48,7 +48,8 @@
         "id": "@shopgate/cart",
         "path": "@shopgate/cart/cart/addProductsToCart.js",
         "input": [
-          {"key": "products", "id": "1020"}
+          {"key": "products", "id": "1020"},
+          {"key": "productsCollection", "id": "1022"}
         ],
         "output": [
           {"key": "messages", "id": "1030", "optional": true}
@@ -57,9 +58,7 @@
       {
         "type": "pipeline",
         "id": "shopgate.cart.trackCartChangedEvent.v1",
-        "input": [
-          {"key": "sgxsMeta", "id": "1000"}
-        ],
+        "input": [],
         "output": []
       }
     ]

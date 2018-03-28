@@ -8,7 +8,8 @@ module.exports = function (context, input, cb) {
     if (err) cb(err)
 
     cb(null, {
-      cartItems: cart || []
+      cartItems: cart || [],
+      messages: []
     })
   })
 }

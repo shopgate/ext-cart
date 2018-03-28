@@ -5,7 +5,7 @@ describe('checkProducts', () => {
   it('succeeds when checkProducts gets valid input data', (done) => {
     const input = {
       productIds: ['SG1'],
-      products: [
+      productsCollection: [
         {
           id: 'SG1'
         }

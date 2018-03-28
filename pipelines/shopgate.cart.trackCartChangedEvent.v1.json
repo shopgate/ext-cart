@@ -3,17 +3,13 @@
   "pipeline": {
     "id": "shopgate.cart.trackCartChangedEvent.v1",
     "public": true,
-    "input": [
-      {"key": "sgxsMeta", "id": "1000"}
-    ],
+    "input": [],
     "output": [],
     "steps": [
       {
         "type": "pipeline",
         "id": "shopgate.cart.getCart.v1",
-        "input": [
-          {"key": "sgxsMeta", "id": "1000"}
-        ],
+        "input": [],
         "output": [
           {"key": "totals", "id": "3"}
         ]

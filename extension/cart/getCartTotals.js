@@ -22,8 +22,8 @@ module.exports = function (context, input, cb) {
 
   const couponsFixed = cartItems
     .filter(item => item.type === COUPON)
-    .filter(item => item.savedPrice.type === COUPON_FIXED)
-    .map(item => item.savedPrice.value)
+    .filter(item => item.coupon.savedPrice.type === COUPON_FIXED)
+    .map(item => item.coupon.savedPrice.value)
     .reduce(
       (sum, amount) => sum + amount,
       0
@@ -32,8 +32,8 @@ module.exports = function (context, input, cb) {
 
   const couponsPercent = cartItems
     .filter(item => item.type === COUPON)
-    .filter(item => item.savedPrice.type === COUPON_PERCENT)
-    .map(item => item.savedPrice.value)
+    .filter(item => item.coupon.savedPrice.type === COUPON_PERCENT)
+    .map(item => item.coupon.savedPrice.value)
     .reduce(
       (sum, percent) => sum + (total * (percent / 100)),
       0
@@ -43,19 +43,19 @@ module.exports = function (context, input, cb) {
   const totals = []
   totals.push({
     label: null,
-    amount: roundAmount(subTotal),
-    type: 'total'
+    amount: subTotal,
+    type: 'subTotal'
   })
   if (couponsPercent || couponsFixed) {
     totals.push({
       label: null,
-      amount: roundAmount(couponsPercent + couponsFixed),
-      type: 'coupons'
+      amount: couponsPercent + couponsFixed,
+      type: 'discounts'
     })
   }
   totals.push({
     label: null,
-    amount: roundAmount(total),
+    amount: total,
     type: 'grandTotal'
   })
 
@@ -63,8 +63,4 @@ module.exports = function (context, input, cb) {
     currency: context.config.currency,
     totals
   })
-}
-
-function roundAmount (amount) {
-  return Math.round((amount / 100) * 100) / 100
 }

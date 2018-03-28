@@ -37,19 +37,24 @@ module.exports = function (context, input, cb) {
           cartChanged = true
         }
 
-        cart.push({
+        const newCoupon = {
           id: `coupon_${couponCode}`.toLowerCase(),
-          productId: couponCode,
           quantity: 1,
           type: COUPON,
-          code: coupon.code,
-          description: coupon.code,
-          label: coupon.code,
-          savedPrice: {
-            value: coupon.value,
-            type: coupon.type
-          }
-        })
+          product: null,
+          coupon: {
+            code: coupon.code,
+            description: null,
+            label: 'Coupon',
+            savedPrice: {
+              value: coupon.value,
+              type: coupon.type
+            }
+          },
+          messages: []
+        }
+
+        cart.push(newCoupon)
 
         if (!allowMultipleCoupons) {
           // stop a loop to prevent multiple coupons

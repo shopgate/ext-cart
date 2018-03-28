@@ -16,7 +16,7 @@ module.exports = function (context, input, cb) {
 
     const cartChanged = cart.filter(item => {
       if (item.type === COUPON) {
-        return !input.couponCodes.includes(item.productId)
+        return !input.couponCodes.includes(item.coupon.code)
       }
       return true
     })

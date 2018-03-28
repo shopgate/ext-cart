@@ -5,7 +5,14 @@ describe('updateProductsInCart', () => {
   const cart = [
     {
       id: 'qwerty123',
-      quantity: 1
+      quantity: 1,
+      product: {
+        price: {
+          unit: 200,
+          default: 200,
+          special: null
+        }
+      }
     }
   ]
   const context = {
@@ -23,7 +30,14 @@ describe('updateProductsInCart', () => {
     const updatedCart = [
       {
         id: 'qwerty123',
-        quantity: 2
+        quantity: 2,
+        product: {
+          price: {
+            unit: 200,
+            default: 400,
+            special: null
+          }
+        }
       }
     ]
     const input = {
