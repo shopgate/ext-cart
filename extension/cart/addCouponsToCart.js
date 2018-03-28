@@ -12,7 +12,6 @@ const {COUPON} = require('./consts')
  * @param {function} cb
  */
 module.exports = function (context, input, cb) {
-
   /** @type {Cart} cart */
   context.storage.device.get('cart', (err, cart) => {
     if (err) cb(err)
@@ -24,13 +23,12 @@ module.exports = function (context, input, cb) {
     const allowMultipleCoupons = context.config.allowMultipleCoupons
     const messages = []
     let cartChanged = false
-    input.couponCodes.forEach(function loop(couponCode) {
+    input.couponCodes.forEach(function loop (couponCode) {
       // forEach loop is stopped
       if (loop.stop) return
 
       const coupon = getCouponByCode(couponCode)
       if (coupon) {
-
         cartChanged = true
 
         if (!allowMultipleCoupons) {
@@ -57,7 +55,6 @@ module.exports = function (context, input, cb) {
           // stop a loop to prevent multiple coupons
           loop.stop = true
         }
-
       } else {
         messages.push(`Coupon ${couponCode} is invalid`)
       }
@@ -74,7 +71,7 @@ module.exports = function (context, input, cb) {
   })
 }
 
-function getCouponByCode(code) {
+function getCouponByCode (code) {
   let coupon = null
   couponCodes.forEach(singleCoupon => {
     if (singleCoupon.code === code) {

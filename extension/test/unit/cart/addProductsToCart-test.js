@@ -80,7 +80,7 @@ describe('addProductsToCart', () => {
       products: [
         {
           productId: 'SG1',
-          quantity: 2
+          quantity: 1
         }
       ]
     }

@@ -20,6 +20,7 @@ describe('getEventData', () => {
   })
 
   it('Return zero when grand total not found', (done) => {
+    // noinspection JSCheckFunctionSignatures
     getEventData({}, {}, (err, result) => {
       assert.ifError(err)
       assert.equal(result.eventData.amount, 0)

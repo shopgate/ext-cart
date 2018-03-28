@@ -15,7 +15,7 @@ describe('deleteProductsFromCart', () => {
       productId: '10off',
       code: '10off',
       type: COUPON,
-      quantity: 1,
+      quantity: 1
     }
   ]
   const context = {

@@ -19,8 +19,7 @@ module.exports = function (context, input, cb) {
         return true
       }
       return !input.CartItemIds.includes(item.id)
-      }
-    )
+    })
 
     context.storage.device.set('cart', newCart, (err) => {
       if (err) cb(err)

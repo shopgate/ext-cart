@@ -1,7 +1,7 @@
 const assert = require('assert')
 const updateCartItemsInfo = require('../../../cart/updateCartItemsInfo')
 
-describe('updateProductsInCart', () => {
+describe('updateCartItemsInfo', () => {
   const input = {
     cartItems: [
       {
@@ -11,7 +11,7 @@ describe('updateProductsInCart', () => {
         type: 'product'
       }
     ],
-    productsCollection: [
+    products: [
       {
         id: 'SG1',
         name: 'Simple Product',
@@ -78,7 +78,7 @@ describe('updateProductsInCart', () => {
         product: {
           id: 'SG1',
           name: 'Simple Product',
-          featuredImageUrl: "https://fake.com",
+          featuredImageUrl: 'https://fake.com',
           price: {
             default: 400,
             special: 400,
@@ -90,6 +90,7 @@ describe('updateProductsInCart', () => {
         }
       }
     ]
+    // noinspection JSCheckFunctionSignatures
     updateCartItemsInfo({}, input, (err, res) => {
       assert.ifError(err)
       assert.deepEqual(res.cartItems, expectedCartItems)

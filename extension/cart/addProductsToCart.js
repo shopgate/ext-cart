@@ -57,7 +57,7 @@ module.exports = function (context, input, cb) {
  * @param {Cart} cart
  * @param {AddCartItem} product
  */
-function cartHasProduct(cart, product) {
+function cartHasProduct (cart, product) {
   if (cart.length === 0) return false
 
   let existsInCart = false
@@ -73,7 +73,7 @@ function cartHasProduct(cart, product) {
  * @param {Cart} cart
  * @param {AddCartItem} product
  */
-function addProductToCart(cart, product) {
+function addProductToCart (cart, product) {
   product.id = getCartItemId(product)
   // noinspection JSCheckFunctionSignatures : price will be added later
   cart.push(product)
@@ -83,7 +83,7 @@ function addProductToCart(cart, product) {
  * @param {Cart} cart
  * @param {AddCartItem} product
  */
-function updateProductInCart(cart, product) {
+function updateProductInCart (cart, product) {
   cart.forEach(cartItem => {
     if (cartItem.productId === product.productId) {
       cartItem.quantity += product.quantity
@@ -95,6 +95,6 @@ function updateProductInCart(cart, product) {
  * Use productId as CartItemId
  * @param {AddCartItem} product
  */
-function getCartItemId(product) {
+function getCartItemId (product) {
   return `product_${product.productId}`.toLowerCase()
 }

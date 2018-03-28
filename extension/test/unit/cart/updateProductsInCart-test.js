@@ -39,6 +39,7 @@ describe('updateProductsInCart', () => {
       assert.deepEqual(newCartArg, updatedCart)
       cb()
     }
+    // noinspection JSCheckFunctionSignatures
     updateProductsInCart(context, input, (err) => {
       assert.ifError(err)
       done()
@@ -60,6 +61,7 @@ describe('updateProductsInCart', () => {
       assert.deepEqual(newCart, updatedCart)
       cb()
     }
+    // noinspection JSCheckFunctionSignatures
     updateProductsInCart(context, input, (err) => {
       assert.ifError(err)
       done()

@@ -65,6 +65,6 @@ module.exports = function (context, input, cb) {
   })
 }
 
-function roundAmount(amount) {
+function roundAmount (amount) {
   return Math.round((amount / 100) * 100) / 100
 }

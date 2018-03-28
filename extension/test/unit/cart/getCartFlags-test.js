@@ -4,7 +4,7 @@ const getCartFlags = require('../../../cart/getCartFlags')
 describe('getCartFlags', () => {
   const context = {
     config: {
-      hasCoupons: false,
+      hasCoupons: false
     }
   }
   it('Should get cart flags', (done) => {
