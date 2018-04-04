@@ -1,6 +1,6 @@
 /**
- * @param {object} context
- * @param {object} input
+ * @param {Object} context
+ * @param {Object} input
  * @param {Array} input.totals
  *
  * @example input.totals

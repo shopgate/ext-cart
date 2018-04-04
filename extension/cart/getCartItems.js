@@ -1,6 +1,6 @@
 /**
  * @param {SDKContext} context
- * @param {object} input
+ * @param {Object} input
  * @param {function} cb
  */
 module.exports = function (context, input, cb) {

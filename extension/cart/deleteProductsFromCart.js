@@ -1,7 +1,7 @@
 const {PRODUCT} = require('./consts')
 /**
  * @param {SDKContext} context
- * @param {object} input
+ * @param {Object} input
  * @param {string[]} input.CartItemIds
  * @param {function} cb
  */

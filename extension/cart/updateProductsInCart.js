@@ -6,7 +6,7 @@
 
 /**
  * @param {SDKContext} context
- * @param {object} input
+ * @param {Object} input
  * @param {UpdateCartItem[]} input.CartItem
  * @param {function} cb
  */
@@ -23,8 +23,7 @@ module.exports = function (context, input, cb) {
     cart.forEach(cartItem => {
       input.CartItem.forEach(item => {
         if (item.CartItemId === cartItem.id) {
-          cartItem.quantity = item.quantity
-          cartItem.product.price.default = cartItem.quantity * cartItem.product.price.unit
+          cartItem.product.price.default = item.quantity * cartItem.product.price.unit
         }
       })
     })

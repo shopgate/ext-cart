@@ -7,7 +7,7 @@ const {COUPON} = require('./consts')
  * Pay attention to extension config: allowMultipleCoupons
  *
  * @param {SDKContext} context
- * @param {object} input
+ * @param {Object} input
  * @param {string[]} input.couponCodes
  * @param {function} cb
  */

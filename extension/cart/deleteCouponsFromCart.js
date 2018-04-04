@@ -1,7 +1,7 @@
 const {COUPON} = require('./consts')
 /**
  * @param {SDKContext} context
- * @param {object} input
+ * @param {Object} input
  * @param {string[]} input.couponCodes
  * @param {function} cb
  */
