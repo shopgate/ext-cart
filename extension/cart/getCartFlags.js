@@ -12,8 +12,8 @@ module.exports = function (context, input, cb) {
   }
 
   return cb(null, {
-    isOrderable: true,
-    isTaxIncluded: false,
+    isOrderable: flags.orderable,
+    isTaxIncluded: flags.taxIncluded,
     flags
   })
 }
