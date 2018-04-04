@@ -1,6 +1,6 @@
 const assert = require('assert')
 const addProductsToCart = require('../../../cart/addProductsToCart')
-const {PRODUCT} = require('../../../cart/consts')
+const {PRODUCT} = require('../../../common/consts')
 
 describe('addProductsToCart', () => {
   const context = {

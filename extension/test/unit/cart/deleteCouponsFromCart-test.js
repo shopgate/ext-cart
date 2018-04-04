@@ -1,6 +1,6 @@
 const assert = require('assert')
 const deleteCouponsFromCart = require('../../../cart/deleteCouponsFromCart')
-const {PRODUCT, COUPON} = require('../../../cart/consts')
+const {PRODUCT, COUPON} = require('../../../common/consts')
 const couponCodes = require('../../../cart/couponCodes')
 
 describe('deleteCouponsFromCart', () => {

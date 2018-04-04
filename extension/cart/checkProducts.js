@@ -1,4 +1,4 @@
-const ProductNotFound = require('./ProductNotFound')
+const ProductNotFound = require('../common/Error/ProductNotFound')
 
 /**
  * Check if all products from getProducts step are present before adding them to a cart
@@ -25,5 +25,5 @@ module.exports = function (context, input, cb) {
   if (notFoundProductIds.length) {
     return cb(new ProductNotFound(notFoundProductIds))
   }
-  cb(null)
+  cb()
 }

@@ -1,4 +1,4 @@
-const {PRODUCT} = require('./consts')
+const {PRODUCT} = require('../common/consts')
 /**
  * @param {SDKContext} context
  * @param {Object} input

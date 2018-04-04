@@ -1,4 +1,4 @@
-const {PRODUCT, COUPON, COUPON_PERCENT, COUPON_FIXED} = require('./consts')
+const {PRODUCT, COUPON, COUPON_PERCENT, COUPON_FIXED} = require('../common/consts')
 
 /**
  * Get cart totals information

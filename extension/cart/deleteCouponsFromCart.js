@@ -1,4 +1,4 @@
-const {COUPON} = require('./consts')
+const {COUPON} = require('../common/consts')
 /**
  * @param {SDKContext} context
  * @param {Object} input

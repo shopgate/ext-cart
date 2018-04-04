@@ -1,4 +1,4 @@
-const {PRODUCT} = require('./consts')
+const {PRODUCT} = require('../common/consts')
 /**
  * @typedef {Object} AddCartItem
  * @property {string} productId

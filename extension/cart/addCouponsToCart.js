@@ -1,6 +1,6 @@
 /** @type {Array} */
 const couponCodes = require('./couponCodes')
-const {COUPON} = require('./consts')
+const {COUPON} = require('../common/consts')
 
 /**
  * Add coupons to a cart
