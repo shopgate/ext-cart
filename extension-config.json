@@ -1,39 +1,41 @@
 {
   "version": "1.0.0",
   "id": "@shopgate/cart",
-  "currency" : {
-    "type" : "static",
-    "destination" : "backend",
-    "params" : {
-      "value" : "EUR"
-    }
-  },
-  "hasCoupons" : {
-    "type" : "static",
-    "destination" : "backend",
-    "params" : {
-      "value" : true
-    }
-  },
-  "allowMultipleCoupons" : {
-    "type" : "static",
-    "destination" : "backend",
-    "params" : {
-      "value" : false
-    }
-  },
-  "legalText" : {
-    "type" : "static",
-    "destination" : "backend",
-    "params" : {
-      "value" : "By placing your order you agree to our <b><u>Privacy Policy</u></b>, our <b><u>Terms and Conditions</u></b> and our <b><u>Cancellation policy</u></b>."
-    }
-  },
-  "legalInfo" : {
-    "type" : "static",
-    "destination" : "backend",
-    "params" : {
-      "value" : "Additional charges (duties, taxes) may be raised, when shipping to countries outside of the EU."
+  "configuration": {
+    "currency" : {
+      "type" : "static",
+      "destination" : "backend",
+      "params" : {
+        "value" : "EUR"
+      }
+    },
+    "hasCoupons" : {
+      "type" : "static",
+      "destination" : "backend",
+      "params" : {
+        "value" : true
+      }
+    },
+    "allowMultipleCoupons" : {
+      "type" : "static",
+      "destination" : "backend",
+      "params" : {
+        "value" : false
+      }
+    },
+    "legalText" : {
+      "type" : "static",
+      "destination" : "backend",
+      "params" : {
+        "value" : "By placing your order you agree to our <b><u>Privacy Policy</u></b>, our <b><u>Terms and Conditions</u></b> and our <b><u>Cancellation policy</u></b>."
+      }
+    },
+    "legalInfo" : {
+      "type" : "static",
+      "destination" : "backend",
+      "params" : {
+        "value" : "Additional charges (duties, taxes) may be raised, when shipping to countries outside of the EU."
+      }
     }
   }
 }
