@@ -7,33 +7,33 @@
 /**
  * @param {SDKContext} context
  * @param {Object} input
- * @param {UpdateCartItem[]} input.CartItem
+ * @param {UpdateCartItem[]} input.updateItems
  * @param {function} cb
  */
 module.exports = function (context, input, cb) {
   /** @type {Cart} cart */
   context.storage.device.get('cart', (err, cart) => {
-    if (err) cb(err)
-
-    if (!cart) {
-      return cb()
+    if (err || !cart) {
+      return cb(err || null)
     }
 
-    // 1. Update quantity
-    cart.forEach(cartItem => {
-      input.CartItem.forEach(item => {
-        if (item.CartItemId === cartItem.id) {
-          cartItem.product.price.default = item.quantity * cartItem.product.price.unit
-        }
-      })
+    // find all items to update and remove the ones without quantity
+    cart = cart.filter(cartItem => {
+      let updateItem = input.updateItems.find(updateItem => cartItem.id === updateItem.CartItemId)
+      if (updateItem) {
+        cartItem.quantity = updateItem.quantity
+        cartItem.product.price.default = cartItem.quantity * cartItem.product.price.unit
+
+        // remove the item if the quantity is zero
+        return cartItem.quantity > 0 ? cartItem : null
+      }
+
+      // no update for this item
+      return cartItem
     })
 
-    // 2. Remove items with zero quantity
-    cart = cart.filter(item => item.quantity > 0)
-
     context.storage.device.set('cart', cart, (err) => {
-      if (err) cb(err)
-      cb()
+      cb(err || null)
     })
   })
 }

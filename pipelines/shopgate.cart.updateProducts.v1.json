@@ -15,7 +15,7 @@
         "id": "@shopgate/cart",
         "path": "@shopgate/cart/cart/updateProductsInCart.js",
         "input": [
-          {"key": "CartItem", "id": "1020", "optional": true}
+          {"key": "updateItems", "id": "1020", "optional": true}
         ],
         "output": [
           {"key": "messages", "id": "1030", "optional": true}
