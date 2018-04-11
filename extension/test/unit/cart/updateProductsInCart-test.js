@@ -41,7 +41,7 @@ describe('updateProductsInCart', () => {
       }
     ]
     const input = {
-      CartItem: [
+      updateItems: [
         {
           CartItemId: 'qwerty123',
           quantity: 2
@@ -63,7 +63,7 @@ describe('updateProductsInCart', () => {
   it('Should remove products with zero quantity', (done) => {
     const updatedCart = []
     const input = {
-      CartItem: [
+      updateItems: [
         {
           CartItemId: 'qwerty123',
           quantity: 0

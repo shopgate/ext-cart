@@ -36,7 +36,7 @@
       {
         "type": "extension",
         "id": "@shopgate/cart",
-        "path": "@shopgate/cart/cart/checkProducts.js",
+        "path": "@shopgate/cart/cart/checkProductPresence.js",
         "input": [
           {"key": "productIds", "id": "1021"},
           {"key": "productsCollection", "id": "1022"}

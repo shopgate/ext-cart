@@ -6,8 +6,8 @@
  */
 module.exports = function (context, input, cb) {
   const flags = {
-    orderable: true, // TODO implement orderable policy
-    taxIncluded: false, // TODO implement tax policy
+    orderable: true, // TODO: implement orderable policy
+    taxIncluded: false, // TODO: implement tax policy
     coupons: context.config.hasCoupons
   }
 

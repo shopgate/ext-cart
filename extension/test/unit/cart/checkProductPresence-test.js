@@ -1,8 +1,8 @@
 const assert = require('assert')
-const checkProducts = require('../../../cart/checkProducts')
+const checkProducts = require('../../../cart/checkProductPresence')
 
-describe('checkProducts', () => {
-  it('succeeds when checkProducts gets valid input data', (done) => {
+describe('checkProductPresence', () => {
+  it('succeeds when checkProductPresence gets valid input data', (done) => {
     const input = {
       productIds: ['SG1'],
       productsCollection: [
@@ -18,7 +18,7 @@ describe('checkProducts', () => {
     })
   })
 
-  it('should return an error when products are missing', (done) => {
+  it('should return an error when products to be added are missing', (done) => {
     const input = {
       productIds: ['SG1', 'SG2'],
       products: [

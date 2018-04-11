@@ -1,6 +1,6 @@
 const assert = require('assert')
 const getCartTotals = require('../../../cart/getCartTotals')
-const {PRODUCT, COUPON, COUPON_FIXED, COUPON_PERCENT} = require('../../../cart/consts')
+const {PRODUCT, COUPON, COUPON_FIXED, COUPON_PERCENT} = require('../../../common/consts')
 
 describe('getCartTotals', () => {
   const context = {
