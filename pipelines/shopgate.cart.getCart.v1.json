@@ -28,11 +28,12 @@
         "type": "extension",
         "id": "@shopgate/cart",
         "path": "@shopgate/cart/cart/getCartItems.js",
-        "input": [],
+        "input": [
+          {"key": "cartStorageName", "id": "1090"}
+        ],
         "output": [
           {"key": "cartItems", "id": "1060"},
-          {"key": "messages", "id": "1040", "optional": true},
-          {"key": "cartStorageName", "id": "1090"}
+          {"key": "messages", "id": "1040", "optional": true}
         ]
       },
       {
