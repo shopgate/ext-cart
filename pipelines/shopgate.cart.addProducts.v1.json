@@ -39,9 +39,18 @@
         "path": "@shopgate/cart/cart/checkProductPresence.js",
         "input": [
           {"key": "productIds", "id": "1021"},
-          {"key": "productsCollection", "id": "1022"}
+          {"key": "catalogProducts", "id": "1022"}
         ],
         "output": []
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartStorageName.js",
+        "input": [],
+        "output": [
+          {"key": "cartStorageName", "id": "1040", "optional": true}
+        ]
       },
       {
         "type": "extension",
@@ -49,7 +58,8 @@
         "path": "@shopgate/cart/cart/addProductsToCart.js",
         "input": [
           {"key": "products", "id": "1020"},
-          {"key": "productsCollection", "id": "1022"}
+          {"key": "catalogProducts", "id": "1022"},
+          {"key": "cartStorageName", "id": "1040"}
         ],
         "output": [
           {"key": "messages", "id": "1030", "optional": true}

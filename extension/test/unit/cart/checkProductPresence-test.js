@@ -5,7 +5,7 @@ describe('checkProductPresence', () => {
   it('succeeds when checkProductPresence gets valid input data', (done) => {
     const input = {
       productIds: ['SG1'],
-      productsCollection: [
+      catalogProducts: [
         {
           id: 'SG1'
         }

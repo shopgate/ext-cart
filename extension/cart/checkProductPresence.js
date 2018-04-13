@@ -6,12 +6,12 @@ const ProductNotFound = require('../common/Error/ProductNotFound')
  *
  * @param {Object} input
  * @param {Array} input.productIds
- * @param {Array} input.productsCollection
+ * @param {Array} input.catalogProducts
  *
  * @param {function} cb
  */
 module.exports = function (context, input, cb) {
-  const products = input.productsCollection || []
+  const products = input.catalogProducts || []
   const notFoundProductIds = input.productIds.filter(productId => {
     let hasProduct = false
     products.forEach((product) => {

@@ -1,4 +1,5 @@
-const {PRODUCT} = require('../common/consts')
+const { PRODUCT } = require('../common/consts')
+const InternalError = require('../common/Error/InternalError')
 /**
  * @typedef {Object} AddCartItem
  * @property {string} productId
@@ -10,63 +11,85 @@ const {PRODUCT} = require('../common/consts')
  * @param {SDKContext} context
  * @param {Object} input
  * @param {AddCartItem[]} input.products
- * @param {Object[]} input.productsCollection
- * @param {function} cb
+ * @param {AddCartItem[]} input.cartStorageName
+ * @param {Object[]} input.catalogProducts
  */
-module.exports = function (context, input, cb) {
-  context.storage.device.get('cart', (err, cart) => {
-    if (err) return cb(err)
+module.exports = async (context, input) => {
+  const cartStorageKey = 'cart'
 
-    if (!cart) {
-      cart = []
-    }
+  // filter out products to add with zero quantity and sum up quantities of duplicated products
+  const inputProducts = input.products
+    .filter(product => product.quantity > 0)
+    .reduce((result, el) => {
+      // check if the current product was already seen in an earlier iteration
+      const found = result.find(searchEl => searchEl.productId === el.productId)
+      if (found) {
+        found.quantity += el.quantity
+      } else {
+        result.push(el)
+      }
 
-    // Filter out zero quantity
-    const addProducts = input.products.filter(product => product.quantity > 0)
+      return result
+    }, []
+  )
 
-    // Collect products to be added to a cart
-    const productsToAdd = addProducts.filter(product => {
-      return !cartHasProduct(cart, product)
-    })
-    // Collect products to be updated in a cart
-    const productsToUpdate = addProducts.filter(product => {
-      return cartHasProduct(cart, product)
-    })
+  // don't do anything, if the input is empty
+  if (inputProducts.length <= 0) {
+    context.log.info('Tried to add "no" products or only zero quantities to the cart.')
+    return
+  }
 
-    // add new products to cart
-    productsToAdd.forEach(product => {
-      input.productsCollection.forEach((productInfo) => {
-        if (productInfo.id === product.productId) {
-          addProductToCart(cart, product, productInfo)
-        }
-      })
-    })
+  // load current cart
+  let cart
+  try {
+    cart = await context.storage[input.cartStorageName].get(cartStorageKey)
+  } catch (err) {
+    context.log.error(`Failed loading '${cartStorageKey}' from '${input.cartStorageName}' storage.`)
+    throw new InternalError()
+  }
 
-    // update products in cart
-    productsToUpdate.forEach(product => updateProductInCart(cart, product))
+  // initialize cart if nonexistent
+  if (!cart) {
+    cart = []
+  }
 
-    context.storage.device.set('cart', cart, (err) => {
-      if (err) cb(err)
-      cb()
+  // update products in cart first
+  const productsToUpdate = inputProducts.filter(product => !!findProduct(cart, product))
+  productsToUpdate.forEach(product => updateProductInCart(cart, product))
+
+  // add new products to cart
+  const productsToAdd = inputProducts.filter(product => !findProduct(cart, product))
+  productsToAdd.forEach(product => {
+    input.catalogProducts.forEach((productInfo) => {
+      if (productInfo.id === product.productId) {
+        addProductToCart(cart, product, productInfo)
+      }
     })
   })
+
+  // save new cart
+  try {
+    await context.storage[input.cartStorageName].set(cartStorageKey, cart)
+  } catch (err) {
+    context.log.error(
+      `Failed saving '${cartStorageKey}' to '${input.cartStorageName}' storage. Data: `,
+      cart
+    )
+    throw new InternalError()
+  }
 }
 
 /**
- * Check if product exists in cart
+ * Check if the product exists in cart
+ *
  * @param {Cart} cart
  * @param {AddCartItem} product
+ * @return {CartItem}
  */
-function cartHasProduct (cart, product) {
-  if (cart.length === 0) return false
-
-  let existsInCart = false
-  cart.forEach(cartItem => {
-    if (cartItem.type === PRODUCT && cartItem.product.id === product.productId) {
-      existsInCart = true
-    }
-  })
-  return existsInCart
+function findProduct (cart, product) {
+  return cart.find(
+    cartItem => cartItem.type === PRODUCT && cartItem.product.id === product.productId
+  )
 }
 
 /**
@@ -96,7 +119,7 @@ function addProductToCart (cart, product, productInfo) {
     messages: []
   }
   // noinspection JSCheckFunctionSignatures : price will be added later
-  cart.unshift(newCartItem)
+  cart.push(newCartItem)
 }
 
 /**
@@ -104,12 +127,11 @@ function addProductToCart (cart, product, productInfo) {
  * @param {AddCartItem} product
  */
 function updateProductInCart (cart, product) {
-  cart.forEach(cartItem => {
-    if (cartItem.type === PRODUCT && cartItem.product.id === product.productId) {
-      cartItem.quantity += product.quantity
-      cartItem.product.price.default = cartItem.quantity * cartItem.product.price.unit
-    }
-  })
+  const cartItem = findProduct(cart, product)
+  if (cartItem) {
+    cartItem.quantity += product.quantity
+    cartItem.product.price.default = cartItem.quantity * cartItem.product.price.unit
+  }
 }
 
 /**
