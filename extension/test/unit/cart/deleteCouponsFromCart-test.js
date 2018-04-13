@@ -34,7 +34,7 @@ describe('deleteCouponsFromCart', () => {
 
   it('Should remove coupon from cart', (done) => {
     const input = {
-      couponCodes: [coupon.code],
+      couponCodes: [`coupon_${coupon.code}`],
       cartStorageName
     }
     const expectedCart = [
