@@ -25,11 +25,14 @@ describe('addCouponsToCart', () => {
       }
     }
   }
+  const cartStorageName = 'device'
+
   it('Should add multiple coupons to a cart', (done) => {
     const coupon1 = couponCodes[0]
     const coupon2 = couponCodes[1]
     const input = {
-      couponCodes: [coupon1.code, coupon2.code]
+      couponCodes: [coupon1.code, coupon2.code],
+      cartStorageName
     }
     const expectedCart = [
       cart[0],
@@ -66,7 +69,7 @@ describe('addCouponsToCart', () => {
         messages: []
       }
     ]
-    context.storage.device.set = (key, newCartArg, cb) => {
+    context.storage[cartStorageName].set = (key, newCartArg, cb) => {
       assert.equal(key, 'cart')
       assert.deepEqual(newCartArg, expectedCart)
       cb()
@@ -83,7 +86,8 @@ describe('addCouponsToCart', () => {
     const coupon1 = couponCodes[0]
     const coupon2 = couponCodes[1]
     const input = {
-      couponCodes: [coupon1.code, coupon2.code]
+      couponCodes: [coupon1.code, coupon2.code],
+      cartStorageName
     }
     const cartWithCoupon = [
       cart[0],
@@ -112,11 +116,11 @@ describe('addCouponsToCart', () => {
         messages: []
       }
     ]
-    context.storage.device.get = (key, cb) => {
+    context.storage[cartStorageName].get = (key, cb) => {
       assert.equal(key, 'cart')
       cb(null, cartWithCoupon)
     }
-    context.storage.device.set = (key, newCartArg, cb) => {
+    context.storage[cartStorageName].set = (key, newCartArg, cb) => {
       assert.equal(key, 'cart')
       assert.deepEqual(newCartArg, expectedCart)
       cb()

@@ -3,11 +3,12 @@ const {PRODUCT} = require('../common/consts')
  * @param {SDKContext} context
  * @param {Object} input
  * @param {string[]} input.CartItemIds
+ * @param {string} input.cartStorageName
  * @param {function} cb
  */
 module.exports = function (context, input, cb) {
   /** @type {Cart} cart */
-  context.storage.device.get('cart', (err, cart) => {
+  context.storage[input.cartStorageName].get('cart', (err, cart) => {
     if (err) cb(err)
 
     if (!cart) {
@@ -21,7 +22,7 @@ module.exports = function (context, input, cb) {
       return !input.CartItemIds.includes(item.id)
     })
 
-    context.storage.device.set('cart', newCart, (err) => {
+    context.storage[input.cartStorageName].set('cart', newCart, (err) => {
       if (err) cb(err)
       cb()
     })

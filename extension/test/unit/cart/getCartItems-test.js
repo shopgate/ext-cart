@@ -28,9 +28,11 @@ describe('getCartItems', () => {
       }
     }
   }
+  const cartStorageName = 'device'
+
   it('Should get cart items', (done) => {
     // noinspection JSCheckFunctionSignatures
-    getCartItems(context, {}, (err, result) => {
+    getCartItems(context, {cartStorageName}, (err, result) => {
       assert.ifError(err)
       assert.deepEqual(result.cartItems, cart)
       done()

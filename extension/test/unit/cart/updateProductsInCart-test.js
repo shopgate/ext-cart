@@ -25,6 +25,7 @@ describe('updateProductsInCart', () => {
       }
     }
   }
+  const cartStorageName = 'device'
 
   it('Should update products in cart', (done) => {
     const updatedCart = [
@@ -46,9 +47,10 @@ describe('updateProductsInCart', () => {
           CartItemId: 'qwerty123',
           quantity: 2
         }
-      ]
+      ],
+      cartStorageName
     }
-    context.storage.device.set = (key, newCartArg, cb) => {
+    context.storage[cartStorageName].set = (key, newCartArg, cb) => {
       assert.equal(key, 'cart')
       assert.deepEqual(newCartArg, updatedCart)
       cb()
@@ -68,9 +70,10 @@ describe('updateProductsInCart', () => {
           CartItemId: 'qwerty123',
           quantity: 0
         }
-      ]
+      ],
+      cartStorageName
     }
-    context.storage.device.set = (key, newCart, cb) => {
+    context.storage[cartStorageName].set = (key, newCart, cb) => {
       assert.equal(key, 'cart')
       assert.deepEqual(newCart, updatedCart)
       cb()

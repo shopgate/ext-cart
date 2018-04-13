@@ -28,15 +28,17 @@ describe('deleteProductsFromCart', () => {
       }
     }
   }
+  const cartStorageName = 'device'
 
   it('Should remove product from cart', (done) => {
     const input = {
-      CartItemIds: ['qwerty123']
+      CartItemIds: ['qwerty123'],
+      cartStorageName
     }
     const expectedCart = [
       cart[1] // coupon
     ]
-    context.storage.device.set = (key, newCartArg, cb) => {
+    context.storage[cartStorageName].set = (key, newCartArg, cb) => {
       assert.equal(key, 'cart')
       assert.deepEqual(newCartArg, expectedCart)
       cb()

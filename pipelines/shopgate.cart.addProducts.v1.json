@@ -49,7 +49,7 @@
         "path": "@shopgate/cart/cart/getCartStorageName.js",
         "input": [],
         "output": [
-          {"key": "cartStorageName", "id": "1040", "optional": true}
+          {"key": "cartStorageName", "id": "1040"}
         ]
       },
       {

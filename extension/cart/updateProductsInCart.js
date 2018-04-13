@@ -8,11 +8,12 @@
  * @param {SDKContext} context
  * @param {Object} input
  * @param {UpdateCartItem[]} input.updateItems
+ * @param {string} input.cartStorageName
  * @param {function} cb
  */
 module.exports = function (context, input, cb) {
   /** @type {Cart} cart */
-  context.storage.device.get('cart', (err, cart) => {
+  context.storage[input.cartStorageName].get('cart', (err, cart) => {
     if (err || !cart) {
       return cb(err || null)
     }
@@ -32,7 +33,7 @@ module.exports = function (context, input, cb) {
       return cartItem
     })
 
-    context.storage.device.set('cart', cart, (err) => {
+    context.storage[input.cartStorageName].set('cart', cart, (err) => {
       cb(err || null)
     })
   })

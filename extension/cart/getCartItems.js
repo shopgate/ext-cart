@@ -1,10 +1,11 @@
 /**
  * @param {SDKContext} context
  * @param {Object} input
+ * @param {string} input.cartStorageName
  * @param {function} cb
  */
 module.exports = function (context, input, cb) {
-  context.storage.device.get('cart', (err, cart) => {
+  context.storage[input.cartStorageName].get('cart', (err, cart) => {
     if (err) cb(err)
 
     cb(null, {

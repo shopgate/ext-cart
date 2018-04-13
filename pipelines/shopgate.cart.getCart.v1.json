@@ -18,11 +18,21 @@
       {
         "type": "extension",
         "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartStorageName.js",
+        "input": [],
+        "output": [
+          {"key": "cartStorageName", "id": "1090"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
         "path": "@shopgate/cart/cart/getCartItems.js",
         "input": [],
         "output": [
           {"key": "cartItems", "id": "1060"},
-          {"key": "messages", "id": "1040", "optional": true}
+          {"key": "messages", "id": "1040", "optional": true},
+          {"key": "cartStorageName", "id": "1090"}
         ]
       },
       {
