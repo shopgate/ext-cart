@@ -1,3 +1,5 @@
+const InternalError = require('../common/Error/InternalError')
+
 /**
  * @typedef {Object} UpdateCartItem
  * @property {string} CartItemId
@@ -14,8 +16,13 @@
 module.exports = function (context, input, cb) {
   /** @type {Cart} cart */
   context.storage[input.cartStorageName].get('cart', (err, cart) => {
-    if (err || !cart) {
-      return cb(err || null)
+    if (err) {
+      context.log.error(err, `Failed to load a cart from ${input.cartStorageName} storage`)
+      return cb(new InternalError())
+    }
+
+    if (!cart) {
+      return cb()
     }
 
     // find all items to update and remove the ones without quantity
@@ -26,15 +33,19 @@ module.exports = function (context, input, cb) {
         cartItem.product.price.default = cartItem.quantity * cartItem.product.price.unit
 
         // remove the item if the quantity is zero
-        return cartItem.quantity > 0 ? cartItem : null
+        return cartItem.quantity > 0
       }
 
       // no update for this item
-      return cartItem
+      return true
     })
 
     context.storage[input.cartStorageName].set('cart', cart, (err) => {
-      cb(err || null)
+      if (err) {
+        context.log.error(err, `Failed to save a cart to ${input.cartStorageName} storage`)
+        return cb(new InternalError())
+      }
+      cb()
     })
   })
 }

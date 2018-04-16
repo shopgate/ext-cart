@@ -7,7 +7,7 @@ const {PRODUCT} = require('../common/consts')
  */
 module.exports = function (context, input, cb) {
   const productIds = input.products
-    .filter(product => !product.type || product.type === PRODUCT)
+    .filter(product => product.type === PRODUCT)
     .map(product => product.productId)
   cb(null, {productIds})
 }

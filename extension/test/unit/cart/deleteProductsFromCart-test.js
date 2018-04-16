@@ -32,7 +32,7 @@ describe('deleteProductsFromCart', () => {
 
   it('Should remove product from cart', (done) => {
     const input = {
-      CartItemIds: ['qwerty123'],
+      cartItemIds: ['qwerty123'],
       cartStorageName
     }
     const expectedCart = [

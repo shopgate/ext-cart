@@ -1,6 +1,8 @@
 /** @type {Array} */
 const couponCodes = require('./couponCodes')
 const {COUPON} = require('../common/consts')
+const InternalError = require('../common/Error/InternalError')
+const CartItemId = require('./CartItemId')
 
 /**
  * Add coupons to a cart
@@ -15,7 +17,10 @@ const {COUPON} = require('../common/consts')
 module.exports = function (context, input, cb) {
   /** @type {Cart} cart */
   context.storage[input.cartStorageName].get('cart', (err, cart) => {
-    if (err) cb(err)
+    if (err) {
+      context.log.error(err, `Failed to load a cart from ${input.cartStorageName} storage`)
+      return cb(new InternalError())
+    }
 
     if (!cart) {
       cart = []
@@ -39,7 +44,7 @@ module.exports = function (context, input, cb) {
         }
 
         const newCoupon = {
-          id: `coupon_${couponCode}`.toLowerCase(),
+          id: new CartItemId(COUPON, couponCode).toString(),
           quantity: 1,
           type: COUPON,
           product: null,
@@ -71,7 +76,10 @@ module.exports = function (context, input, cb) {
     }
 
     context.storage[input.cartStorageName].set('cart', cart, (err) => {
-      if (err) return cb(err)
+      if (err) {
+        context.log.error(err, `Failed to save a cart to ${input.cartStorageName} storage`)
+        return cb(new InternalError())
+      }
       cb(null, {messages})
     })
   })

@@ -1,10 +1,14 @@
 const { PRODUCT } = require('../common/consts')
 const InternalError = require('../common/Error/InternalError')
+const EmptyInput = require('../common/Error/EmptyInput')
+const CartItemId = require('./CartItemId')
+
 /**
  * @typedef {Object} AddCartItem
  * @property {string} productId
  * @property {number} quantity
  * @property {string} id
+ * @property {string} type
  */
 
 /**
@@ -18,25 +22,12 @@ module.exports = async (context, input) => {
   const cartStorageKey = 'cart'
 
   // filter out products to add with zero quantity and sum up quantities of duplicated products
-  const inputProducts = input.products
-    .filter(product => product.quantity > 0)
-    .reduce((result, el) => {
-      // check if the current product was already seen in an earlier iteration
-      const found = result.find(searchEl => searchEl.productId === el.productId)
-      if (found) {
-        found.quantity += el.quantity
-      } else {
-        result.push(el)
-      }
-
-      return result
-    }, []
-  )
+  const inputProducts = input.products.filter(product => product.quantity > 0)
 
   // don't do anything, if the input is empty
-  if (inputProducts.length <= 0) {
+  if (!inputProducts.length) {
     context.log.info('Tried to add "no" products or only zero quantities to the cart.')
-    return
+    throw new EmptyInput()
   }
 
   // load current cart
@@ -44,7 +35,7 @@ module.exports = async (context, input) => {
   try {
     cart = await context.storage[input.cartStorageName].get(cartStorageKey)
   } catch (err) {
-    context.log.error(`Failed loading '${cartStorageKey}' from '${input.cartStorageName}' storage.`)
+    context.log.error(err, `Failed loading '${cartStorageKey}' from '${input.cartStorageName}' storage.`)
     throw new InternalError()
   }
 
@@ -71,10 +62,7 @@ module.exports = async (context, input) => {
   try {
     await context.storage[input.cartStorageName].set(cartStorageKey, cart)
   } catch (err) {
-    context.log.error(
-      `Failed saving '${cartStorageKey}' to '${input.cartStorageName}' storage. Data: `,
-      cart
-    )
+    context.log.error({err, cart}, `Failed saving '${cartStorageKey}' to '${input.cartStorageName}' storage`)
     throw new InternalError()
   }
 }
@@ -139,5 +127,5 @@ function updateProductInCart (cart, product) {
  * @param {AddCartItem} product
  */
 function getCartItemId (product) {
-  return `product_${product.productId}`.toLowerCase()
+  return new CartItemId(PRODUCT, product.productId).toString()
 }

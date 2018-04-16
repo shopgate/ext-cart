@@ -1,6 +1,7 @@
 const assert = require('assert')
 const executeStep = require('../../../cart/addProductsToCart')
 const {PRODUCT} = require('../../../common/consts')
+const CartItemId = require('./../../../cart/CartItemId')
 
 describe('addProductsToCart', () => {
   // some generic test data
@@ -21,7 +22,7 @@ describe('addProductsToCart', () => {
   }
   function createProductCartItem (productId, quantity, unitPrice, defaultPrice) {
     return {
-      id: `product_${productId}`,
+      id: new CartItemId(PRODUCT, productId).toString(),
       quantity,
       type: PRODUCT,
       product: {
@@ -56,7 +57,7 @@ describe('addProductsToCart', () => {
       catalogProducts
     }
   }
-  function createContext (storageName, storageGetResult, storageSetInput) {
+  function createContext (storageName = 'user', storageGetResult, storageSetInput) {
     function SDKContext () {}
     const context = new SDKContext()
     context.storage = {}
@@ -73,29 +74,22 @@ describe('addProductsToCart', () => {
     return context
   }
 
-  it('Should not save anything, when no products are added', async () => {
-    // no products to add
-    const addProductsList = []
-
-    const currentStorage = storageName.user
+  it('Should throw EmptyInput error, when no products on input', async () => {
+    // products with zero quanity
+    const addProductsList = [
+      {
+        productId: 'SG1',
+        quantity: 0
+      }
+    ]
 
     // mock the step input (storage type is irrelevant here)
-    const input = createInput(currentStorage, addProductsList)
-
-    // use a mocked the storage "set" function (null cart on "get" return)
-    let setWasCalled = false
-    const context = createContext(currentStorage, null, async () => {
-      setWasCalled = true
-    })
-
-    // execute step to run the test
+    const input = createInput('user', addProductsList)
     try {
-      await executeStep(context, input)
-
-      // make sure the save method "set" was not called
-      assert(setWasCalled === false)
+      await executeStep(createContext(), input)
+      assert.fail()
     } catch (err) {
-      assert.ifError(err)
+      assert.equal(err.code, 'EEMPTY')
     }
   })
 
