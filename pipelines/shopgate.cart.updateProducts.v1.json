@@ -1,0 +1,42 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.cart.updateProducts.v1",
+    "public": true,
+    "input": [
+      {"key": "CartItem", "id": "1020"}
+    ],
+    "output": [
+      {"key": "messages", "id": "1030", "optional": true}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartStorageName.js",
+        "input": [],
+        "output": [
+          {"key": "cartStorageName", "id": "1040"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/updateProductsInCart.js",
+        "input": [
+          {"key": "updateItems", "id": "1020", "optional": true},
+          {"key": "cartStorageName", "id": "1040"}
+        ],
+        "output": [
+          {"key": "messages", "id": "1030", "optional": true}
+        ]
+      },
+      {
+        "type": "pipeline",
+        "id": "shopgate.cart.trackCartChangedEvent.v1",
+        "input": [],
+        "output": []
+      }
+    ]
+  }
+}

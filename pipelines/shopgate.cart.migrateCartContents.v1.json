@@ -1,0 +1,47 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.cart.migrateCartContents.v1",
+    "public": true,
+    "input": [
+      {"key": "sgxsMeta", "id": "100"}
+    ],
+    "output": [],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getDeviceCartForMigration.js",
+        "input": [],
+        "output": [
+          {"key": "products", "id": "200"}
+        ]
+      },
+      {
+        "type": "conditional",
+        "input": [
+          {"id": "200", "key": "products"}
+        ],
+        "expression": {
+          "all": [{"ok": [{"name": "products"}]}]
+        },
+        "then": {
+          "type": "pipeline",
+          "id": "shopgate.cart.addProducts.v1",
+          "input": [
+            {"key": "sgxsMeta", "id": "100"},
+            {"key": "products", "id": "200"}
+          ],
+          "output": []
+        }
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/deleteDeviceCart.js",
+        "input": [],
+        "output": []
+      }
+    ]
+  }
+}

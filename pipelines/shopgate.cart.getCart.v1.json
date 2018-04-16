@@ -1,0 +1,73 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.cart.getCart.v1",
+    "public": true,
+    "input": [],
+    "output": [
+      {"key": "isOrderable", "id": "1010"},
+      {"key": "isTaxIncluded", "id": "1020"},
+      {"key": "currency", "id": "1030"},
+      {"key": "messages", "id": "1040", "optional": true},
+      {"key": "text", "id": "1050"},
+      {"key": "cartItems", "id": "1060"},
+      {"key": "totals", "id": "1070"},
+      {"key": "flags", "id": "1080"}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartStorageName.js",
+        "input": [],
+        "output": [
+          {"key": "cartStorageName", "id": "1090"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartItems.js",
+        "input": [
+          {"key": "cartStorageName", "id": "1090"}
+        ],
+        "output": [
+          {"key": "cartItems", "id": "1060"},
+          {"key": "messages", "id": "1040", "optional": true}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartTotals.js",
+        "input": [
+          {"key": "cartItems", "id": "1060"}
+        ],
+        "output": [
+          {"key": "currency", "id": "1030"},
+          {"key": "totals", "id": "1070"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartNotes.js",
+        "input": [],
+        "output": [
+          {"key": "notes", "id": "1050"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartFlags.js",
+        "input": [],
+        "output": [
+          {"key": "isOrderable", "id": "1010"},
+          {"key": "isTaxIncluded", "id": "1020"},
+          {"key": "flags", "id": "1080"}
+        ]
+      }
+    ]
+  }
+}
