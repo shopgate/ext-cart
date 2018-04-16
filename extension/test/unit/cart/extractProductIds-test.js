@@ -1,21 +1,11 @@
 const assert = require('assert')
 const extractProductIds = require('../../../cart/extractProductIds')
-const {PRODUCT, COUPON} = require('../../../common/consts')
 
 describe('extractProductIds', () => {
   const input = {
     products: [
       {
-        id: 'product_1',
         productId: 'SG1',
-        quantity: 1,
-        type: PRODUCT
-      },
-      {
-        id: 'coupon_10off',
-        productId: '10off',
-        code: '10off',
-        type: COUPON,
         quantity: 1
       }
     ]
