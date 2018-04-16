@@ -3,7 +3,9 @@
   "pipeline": {
     "id": "shopgate.cart.migrateCartContents.v1",
     "public": true,
-    "input": [],
+    "input": [
+      {"key": "sgxsMeta", "id": "100"}
+    ],
     "output": [],
     "steps": [
       {
@@ -12,13 +14,13 @@
         "path": "@shopgate/cart/cart/getDeviceCartForMigration.js",
         "input": [],
         "output": [
-          {"key": "products", "id": "1000"}
+          {"key": "products", "id": "200"}
         ]
       },
       {
         "type": "conditional",
         "input": [
-          {"id": "1000", "key": "products"}
+          {"id": "200", "key": "products"}
         ],
         "expression": {
           "all": [{"ok": [{"name": "products"}]}]
@@ -27,7 +29,8 @@
           "type": "pipeline",
           "id": "shopgate.cart.addProducts.v1",
           "input": [
-            {"key": "products", "id": "1000"}
+            {"key": "sgxsMeta", "id": "100"},
+            {"key": "products", "id": "200"}
           ],
           "output": []
         }
