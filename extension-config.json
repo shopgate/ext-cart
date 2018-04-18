@@ -37,5 +37,18 @@
         "value" : "Additional charges (duties, taxes) may be raised, when shipping to countries outside of the EU."
       }
     }
-  }
+  },
+  "components": [
+    {
+      "type": "subscribers",
+      "id": "CartCheckoutSubscribers",
+      "path": "frontend/Checkout/subscribers.js"
+    },
+    {
+      "type": "portals",
+      "id": "CartCheckout",
+      "path": "frontend/Checkout/index.jsx",
+      "target": "checkout.cart"
+    }
+  ]
 }
