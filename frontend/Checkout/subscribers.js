@@ -1,0 +1,45 @@
+import {main$} from '@shopgate/pwa-common/streams/main'
+import { getCartItems } from '@shopgate/pwa-common-commerce/cart/selectors';
+import {ITEM_TYPE_PRODUCT, ITEM_TYPE_COUPON} from "./../constants"
+
+export default (subscribe) => {
+
+  const checkoutEnter$ = main$.filter(({action}) => action.type === 'CHECKOUT_ENTER')
+
+  subscribe(checkoutEnter$, ({ dispatch, getState }) => {
+    dispatch({
+      type: 'CHECKOUT_DATA',
+      id: 'cart',
+      data: mapCartItemsToCheckoutData(getCartItems(getState()))
+    })
+  })
+}
+
+function mapCartItemsToCheckoutData (cartItems) {
+  return cartItems.map(cartItem => {
+    if (cartItem.type === ITEM_TYPE_PRODUCT) {
+      return mapCartProduct(cartItem)
+    }
+    return mapCartCoupon(cartItem)
+  })
+}
+
+function mapCartProduct (cartItemProduct) {
+  return {
+    id: cartItemProduct.product.id,
+    name: cartItemProduct.product.name,
+    type: ITEM_TYPE_PRODUCT,
+    unitPrice: cartItemProduct.product.price.unit,
+    quantity: cartItemProduct.quantity
+  }
+}
+
+function mapCartCoupon (cartItemCoupon) {
+  return {
+    id: cartItemCoupon.coupon.code,
+    name: cartItemCoupon.coupon.label,
+    type: ITEM_TYPE_COUPON,
+    unitPrice: cartItemCoupon.coupon.savedPrice.value,
+    quantity: cartItemCoupon.quantity
+  }
+}
