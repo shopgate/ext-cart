@@ -1,17 +1,14 @@
 import connect from '@shopgate/pwa-common/components/Router/helpers/connect';
-import { isViewLoading } from '@shopgate/pwa-common/selectors/view';
-import { getCartItems, getCartMessages } from '@shopgate/pwa-common-commerce/cart/selectors';
-import { CART_PATH } from '@shopgate/pwa-common-commerce/cart/constants';
+import {
+  getCartItems,
+  getCurrency,
+  getSubTotal
+} from '@shopgate/pwa-common-commerce/cart/selectors';
 
-/**
- * Maps the contents of the state to the component props.
- * @param {Object} state The current application state.
- * @return {Object} The extended component props.
- */
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   cartItems: getCartItems(state),
-  isLoading: isViewLoading(state, CART_PATH),
-  messages: getCartMessages(state),
+  currency: getCurrency(state),
+  subTotal: getSubTotal(state)
 });
 
 export default connect(mapStateToProps);

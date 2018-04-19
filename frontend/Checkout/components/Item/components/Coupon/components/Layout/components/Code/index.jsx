@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Code = ({ value }) => (
   <div>
-    cart.coupon_code: {value}
+    Code: {value}
   </div>
 );
 

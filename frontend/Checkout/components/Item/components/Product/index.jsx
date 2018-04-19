@@ -1,18 +1,17 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import connect from './connector'
 import Layout from './components/Layout'
 
 class Product extends Component {
   static propTypes = {
     currency: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
     product: PropTypes.shape().isRequired,
     quantity: PropTypes.number.isRequired
   }
 
-  static defaultProps = {}
-  static childContextTypes = {}
+  static defaultProps = {
+    product: {}
+  }
 
   constructor(props) {
     super(props)
@@ -29,4 +28,4 @@ class Product extends Component {
   }
 }
 
-export default connect(Product)
+export default Product

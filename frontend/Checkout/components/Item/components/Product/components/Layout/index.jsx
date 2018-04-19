@@ -5,17 +5,17 @@ import ProductImage from './../../../../../../../../../../themes/theme-gmd/compo
 import Properties from './../../../../../../../../../../themes/theme-gmd/components/ProductProperties';
 import Title from './components/Title';
 import ProductPrice from './components/ProductPrice';
+import ProductQuantity from './components/ProductQuantity';
 import styles from './style';
+import Availability from './components/Availability'
 
 const Layout = (props) => (
   <Grid className={styles.item}>
-
     <Grid.Item className={styles.leftColumn}>
       <div className={styles.image}>
           <ProductImage src={props.product.featuredImageUrl} />
       </div>
     </Grid.Item>
-
     <Grid.Item className={styles.content} grow={1}>
       <Title value={props.product.name} />
       <Grid className={styles.info}>
@@ -23,6 +23,8 @@ const Layout = (props) => (
           <Properties properties={props.product.properties} />
         </Grid.Item>
         <Grid.Item grow={1} shrink={0}>
+          <Availability availability={props.product.additionalInfo.availability}/>
+          <ProductQuantity quantity={props.quantity}/>
           <ProductPrice
             currency={props.currency}
             defaultPrice={props.product.price.default}

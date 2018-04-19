@@ -7,24 +7,15 @@ import {
 import Product from './components/Product';
 import Coupon from './components/Coupon';
 
-const Item = ({ item }) => {
+const Item = ({ item, currency }) => {
   if (item.type === ITEM_TYPE_COUPON) {
     return (
-      <Coupon
-        id={item.id}
-        key={item.id}
-        coupon={item.coupon}
-      />
+      <Coupon coupon={item.coupon} currency={currency} />
     );
   }
   if (item.type === ITEM_TYPE_PRODUCT) {
     return (
-      <Product
-        id={item.id}
-        key={item.id}
-        product={item.product}
-        quantity={item.quantity}
-      />
+      <Product product={item.product} quantity={item.quantity} currency={currency}/>
     );
   }
   return null
@@ -32,6 +23,7 @@ const Item = ({ item }) => {
 
 Item.propTypes = {
   item: PropTypes.shape().isRequired,
+  currency: PropTypes.string.isRequired
 };
 
 export default Item;

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import connect from './connector'
 import Layout from './components/Layout'
 
 class Coupon extends Component {
@@ -8,9 +7,9 @@ class Coupon extends Component {
     coupon: PropTypes.shape().isRequired,
     currency: PropTypes.string.isRequired
   }
-
-  static defaultProps = {}
-  static childContextTypes = {}
+  static defaultProps = {
+    coupon: {}
+  }
 
   constructor(props) {
     super(props)
@@ -26,4 +25,4 @@ class Coupon extends Component {
   }
 }
 
-export default connect(Coupon)
+export default Coupon

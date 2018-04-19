@@ -1,12 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@shopgate/pwa-common/components/Grid';
 import Icon from './components/Icon';
 import Title from './components/Title';
 import Code from './components/Code';
 import styles from './style';
+import CouponPrice from "./components/CouponPrice"
 
-const Layout = ({ coupon }) => (
+const Layout = ({ coupon, currency }) => (
   <Grid className={styles.item}>
     <Grid.Item className={styles.icon}>
         <Icon />
@@ -16,6 +17,7 @@ const Layout = ({ coupon }) => (
         <Code value={coupon.code} />
     </Grid.Item>
     <Grid.Item className={`${styles.content} ${styles.contentLast}`} grow={1} shrink={0}>
+        <CouponPrice currency={currency} price={coupon.savedPrice} />
     </Grid.Item>
   </Grid>
 );

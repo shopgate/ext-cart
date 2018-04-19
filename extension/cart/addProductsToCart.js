@@ -101,7 +101,9 @@ function addProductToCart (cart, product, productInfo) {
       },
       properties: [],
       appliedDiscounts: [],
-      additionalInfo: []
+      additionalInfo: {
+        availability: productInfo.availability
+      }
     },
     coupon: null,
     messages: []
