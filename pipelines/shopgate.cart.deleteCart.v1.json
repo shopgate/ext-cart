@@ -1,0 +1,35 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.cart.deleteCart.v1",
+    "public": true,
+    "input": [],
+    "output": [],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartStorageName.js",
+        "input": [],
+        "output": [
+          {"key": "cartStorageName", "id": "1090"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/deleteCart.js",
+        "input": [
+          {"key": "cartStorageName", "id": "1090"}
+        ],
+        "output": []
+      },
+      {
+        "type": "pipeline",
+        "id": "shopgate.cart.trackCartChangedEvent.v1",
+        "input": [],
+        "output": []
+      }
+    ]
+  }
+}
