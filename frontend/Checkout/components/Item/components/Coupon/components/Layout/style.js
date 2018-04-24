@@ -1,32 +1,31 @@
-import { css } from 'glamor';
-import variables from './../../../../../../../../../../themes/theme-gmd/styles/variables';
+import { css } from 'glamor'
 
 const item = css({
   fontSize: '0.875rem',
-  padding: `${variables.gap.small / 2}px ${variables.gap.big}px`,
-}).toString();
+  padding: '4px 16px'
+}).toString()
 
 const icon = css({
   fontSize: '3rem',
   flexShrink: 0,
-  margin: '5px 12px 0 12px',
-}).toString();
+  margin: '5px 12px 0 12px'
+}).toString()
 
 const content = css({
   display: 'flex',
   flexDirection: 'column',
-  paddingLeft: variables.gap.big,
-  paddingTop: variables.gap.small,
-  paddingBottom: variables.gap.small,
-}).toString();
+  paddingLeft: 16,
+  paddingTop: 8,
+  paddingBottom: 8
+}).toString()
 
 const contentLast = css({
-  alignItems: 'flex-end',
-}).toString();
+  alignItems: 'flex-end'
+}).toString()
 
 export default {
   item,
   icon,
   content,
-  contentLast,
-};
+  contentLast
+}

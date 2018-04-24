@@ -1,42 +1,38 @@
-import { css } from 'glamor';
-import colors from './../../../../../../../../../../themes/theme-gmd/styles/colors';
-import variables from './../../../../../../../../../../themes/theme-gmd/styles/variables';
-
-const leftColumnWidth = 72;
+import { css } from 'glamor'
 
 const item = css({
-  padding: variables.gap.big,
-}).toString();
+  padding: 16
+}).toString()
 
 const leftColumn = css({
-  width: leftColumnWidth,
-}).toString();
+  width: 72
+}).toString()
 
 const image = css({
-  background: colors.placeholder,
-  marginBottom: variables.gap.small * 1.25,
-  height: leftColumnWidth,
-  width: leftColumnWidth,
-}).toString();
+  background: '#f2f2f2',
+  marginBottom: 8 * 1.25,
+  height: 72,
+  width: 72
+}).toString()
 
 const content = css({
   display: 'flex',
   flexDirection: 'column',
-  paddingLeft: variables.gap.big,
-}).toString();
+  paddingLeft: 16
+}).toString()
 
 const info = css({
   fontSize: '0.875rem',
-  marginTop: variables.gap.big * 0.875,
-  marginBottom: variables.gap.small * 0.25,
+  marginTop: 16 * 0.875,
+  marginBottom: 8 * 0.25,
   flexGrow: 1,
   alignItems: 'flex-end',
-  justifyContent: 'space-between',
-}).toString();
+  justifyContent: 'space-between'
+}).toString()
 
 const disclaimerSpacer = css({
-  width: 10,
-}).toString();
+  width: 10
+}).toString()
 
 export default {
   item,
@@ -44,5 +40,5 @@ export default {
   image,
   content,
   info,
-  disclaimerSpacer,
-};
+  disclaimerSpacer
+}

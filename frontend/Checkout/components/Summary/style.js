@@ -1,34 +1,33 @@
-import { css } from 'glamor';
-import variables from './../../../../../../themes/theme-gmd/styles/variables';
+import { css } from 'glamor'
 
 const container = css({
-  padding: `${variables.gap.big}px ${variables.gap.small}px`,
-  lineHeight: 1.45,
-}).toString();
+  padding: `16px 8px`,
+  lineHeight: 1.45
+}).toString()
 
 const column = css({
-  padding: `0 ${variables.gap.small}px`,
-}).toString();
+  padding: `0 8px`
+}).toString()
 
 const labelColumn = css({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'flex-start',
-}).toString();
+  justifyContent: 'flex-start'
+}).toString()
 
 const costsColumn = css({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'flex-end',
-}).toString();
+  justifyContent: 'flex-end'
+}).toString()
 
-const buttonColumn = costsColumn;
+const buttonColumn = costsColumn
 
 const checkoutButton = css({
   display: 'flex',
   justifyContent: 'flex-end',
-  marginTop: 1,
-}).toString();
+  marginTop: 1
+}).toString()
 
 export default {
   container,
@@ -36,5 +35,5 @@ export default {
   labelColumn,
   costsColumn,
   buttonColumn,
-  checkoutButton,
-};
+  checkoutButton
+}

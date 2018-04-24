@@ -1,9 +1,8 @@
 import {main$} from '@shopgate/pwa-common/streams/main'
-import { getCartItems } from '@shopgate/pwa-common-commerce/cart/selectors';
-import {ITEM_TYPE_PRODUCT, ITEM_TYPE_COUPON} from "./../constants"
+import { getCartItems } from '@shopgate/pwa-common-commerce/cart/selectors'
+import {ITEM_TYPE_PRODUCT, ITEM_TYPE_COUPON} from './../constants'
 
 export default (subscribe) => {
-
   const checkoutEnter$ = main$.filter(({action}) => action.type === 'CHECKOUT_ENTER')
 
   subscribe(checkoutEnter$, ({ dispatch, getState }) => {
