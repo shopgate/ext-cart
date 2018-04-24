@@ -1,7 +1,12 @@
 const assert = require('assert')
+const {
+  createAddProductItem,
+  createProductCartItem,
+  createCatalogProduct,
+  createInput,
+  createContext
+} = require('../sdkHelper')
 const executeStep = require('../../../cart/addProductsToCart')
-const {PRODUCT} = require('../../../common/consts')
-const CartItemId = require('./../../../cart/CartItemId')
 
 describe('addProductsToCart', () => {
   // some generic test data
@@ -11,67 +16,6 @@ describe('addProductsToCart', () => {
   const storageName = {
     user: 'user',
     device: 'device'
-  }
-
-  // helper functions to create test data
-  function createAddProductItem (productId, quantity) {
-    return {
-      productId,
-      quantity
-    }
-  }
-  function createProductCartItem (productId, quantity, unitPrice, defaultPrice) {
-    return {
-      id: new CartItemId(PRODUCT, productId).toString(),
-      quantity,
-      type: PRODUCT,
-      product: {
-        id: productId,
-        price: {
-          unit: unitPrice,
-          default: defaultPrice
-        }
-      }
-    }
-  }
-  function createCatalogProduct (id, name, unitPrice) {
-    return {
-      id,
-      name,
-      featuredImageUrl: `https://www.examle.com/images/${id}.jpg`,
-      price: {
-        unitPrice
-      }
-    }
-  }
-
-  // factories for context mocks
-  function createInput (cartStorageName, products, catalogProducts) {
-    if (!products) {
-      products = []
-    }
-
-    return {
-      cartStorageName,
-      products,
-      catalogProducts
-    }
-  }
-  function createContext (storageName = 'user', storageGetResult, storageSetInput) {
-    function SDKContext () {}
-    const context = new SDKContext()
-    context.storage = {}
-    context.log = {}
-    context.log.info = () => {}
-    context.log.error = () => {}
-    context.storage[storageName] = {
-      get: async () => {
-        return storageGetResult
-      },
-      set: storageSetInput
-    }
-
-    return context
   }
 
   it('Should throw EmptyInput error, when no products on input', async () => {

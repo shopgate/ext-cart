@@ -1,4 +1,5 @@
 const InternalError = require('../common/Error/InternalError')
+const { PRODUCT, COUPON } = require('../common/consts')
 
 /**
  * @param {SDKContext} context
@@ -13,8 +14,15 @@ module.exports = function (context, input, cb) {
       return cb(new InternalError())
     }
 
+    // put products before coupons without touching the inner order of them
+    const cartItems = !cart ? [] : cart.filter(
+      item => item.type === PRODUCT
+    ).concat(cart.filter(
+      item => item.type === COUPON
+    ))
+
     cb(null, {
-      cartItems: cart || [],
+      cartItems,
       messages: []
     })
   })
