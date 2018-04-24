@@ -1,9 +1,9 @@
-import { css } from 'glamor';
+import { css } from 'glamor'
 
 const totalValue = css({
-  textAlign: 'right',
-}).toString();
+  textAlign: 'right'
+}).toString()
 
 export default {
   totalValue
-};
+}

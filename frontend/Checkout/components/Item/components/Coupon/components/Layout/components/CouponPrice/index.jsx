@@ -1,44 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import I18n from '@shopgate/pwa-common/components/I18n'
 import {
   COUPON_TYPE_FIXED,
-  COUPON_TYPE_PERCENT,
-} from './../../../../../../../../../constants';
-import Price from './../../../../../../../../../../../../themes/theme-gmd/components/Price';
-import styles from './style';
+  COUPON_TYPE_PERCENT
+} from './../../../../../../../../../constants'
+import styles from './style'
 
 const CouponPrice = ({ currency, price }) => {
   const {
     type: discountType,
-    value: discountValue,
-  } = price;
+    value: discountValue
+  } = price
 
   if (discountType === COUPON_TYPE_FIXED) {
     return (
-      <Price
-        className={styles}
-        currency={currency}
-        discounted
-        unitPrice={-discountValue}
-      />
-    );
+      <span className={styles}>
+        <I18n.Price price={-discountValue} currency={currency} />
+      </span>
+    )
   } else if (discountType === COUPON_TYPE_PERCENT) {
     return (
       <span className={styles}>
         -{discountValue}%
       </span>
-    );
+    )
   }
 
-  return null;
-};
+  return null
+}
 
 CouponPrice.propTypes = {
   currency: PropTypes.string.isRequired,
   price: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
-  }).isRequired,
-};
+    value: PropTypes.number.isRequired
+  }).isRequired
+}
 
-export default CouponPrice;
+export default CouponPrice

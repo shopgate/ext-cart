@@ -1,25 +1,30 @@
-import { css } from 'glamor';
-import colors from './../../../../../../../../../../../../themes/theme-gmd/styles/colors';
+import { css } from 'glamor'
+
+const colors = {
+  error: '#ff0000',
+  success: '#35cc29',
+  warning: '#ff9300'
+}
 
 const availability = css({
   textAlign: 'right'
-}).toString();
+}).toString()
 
 const ok = css({
-  color: colors.success,
-}).toString();
+  color: colors.success
+}).toString()
 
 const warning = css({
-  color: colors.warning,
-}).toString();
+  color: colors.warning
+}).toString()
 
 const alert = css({
-  color: colors.error,
-}).toString();
+  color: colors.error
+}).toString()
 
 export default {
   availability,
   ok,
   warning,
-  alert,
-};
+  alert
+}

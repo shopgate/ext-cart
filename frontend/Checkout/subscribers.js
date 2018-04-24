@@ -4,6 +4,7 @@ import fetchCart from '@shopgate/pwa-common-commerce/cart/actions/fetchCart'
 import {ITEM_TYPE_PRODUCT, ITEM_TYPE_COUPON} from './../constants'
 
 export default (subscribe) => {
+
   const checkoutEnter$ = main$.filter(({action}) => action.type === 'CHECKOUT_ENTER')
   const checkoutSuccess$ = main$.filter(({action}) => action.type === 'CHECKOUT_SUCCESS')
 

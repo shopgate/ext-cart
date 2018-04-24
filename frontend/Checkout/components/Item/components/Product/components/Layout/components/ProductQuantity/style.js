@@ -1,9 +1,9 @@
-import { css } from 'glamor';
+import { css } from 'glamor'
 
 const quantity = css({
   textAlign: 'right'
-}).toString();
+}).toString()
 
 export default {
   quantity
-};
+}
