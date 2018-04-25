@@ -5,7 +5,10 @@ import styles from './style'
 
 const ProductPrice = ({ currency, defaultPrice, specialPrice }) => (
   <div className={styles.quantity}>
-    <I18n.Price price={specialPrice || defaultPrice} currency={currency} />
+    <I18n.Price
+      price={specialPrice === 0 ? 0 : (specialPrice || defaultPrice)}
+      currency={currency}
+    />
   </div>
 )
 

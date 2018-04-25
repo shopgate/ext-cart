@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const Properties = ({ properties }) => (
   <ul>
-    {properties.map(({ label, value }) => (
+    {properties.forEach(({ label, value }) => (
       <li key={`${label}-${value}`}>
         {label}: {value}
       </li>
