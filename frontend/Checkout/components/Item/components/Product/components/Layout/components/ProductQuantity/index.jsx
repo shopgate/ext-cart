@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import I18n from '@shopgate/pwa-common/components/I18n'
 import styles from './style'
 
 const ProductQuantity = ({ quantity }) => (
   <div className={styles.quantity}>
-    <span>quantity: {quantity}</span>
+    <span><I18n.Text string='cart.item.quantity' />: {quantity}</span>
   </div>
 )
 

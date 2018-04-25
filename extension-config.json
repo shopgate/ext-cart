@@ -49,6 +49,16 @@
       "id": "CartCheckout",
       "path": "frontend/Checkout/index.jsx",
       "target": "checkout.cart"
+    },
+    {
+      "id": "en-US",
+      "path": "frontend/locale/en-US.json",
+      "type": "translations"
+    },
+    {
+      "id": "de-DE",
+      "path": "frontend/locale/de-DE.json",
+      "type": "translations"
     }
   ]
 }
