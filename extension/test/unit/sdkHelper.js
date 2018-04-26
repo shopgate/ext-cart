@@ -65,7 +65,7 @@ function createInput (cartStorageName, products = null, catalogProducts = null) 
   }
 }
 
-function createContext (storageName = 'user', storageGetResult = null, storageSetHandler = null, storageGetHandler = null) {
+function createContext (storageName = 'user', storageGetResult = null, storageSetHandler = null, storageGetHandler = null, storageDelHandler = null) {
   function SDKContext () {}
   const context = new SDKContext()
   context.storage = {}
@@ -76,7 +76,8 @@ function createContext (storageName = 'user', storageGetResult = null, storageSe
     get: async () => {
       return storageGetResult
     },
-    set: storageSetHandler
+    set: storageSetHandler,
+    del: storageDelHandler
   }
 
   // can overwrite storage get method for special unit testing cases
@@ -87,21 +88,23 @@ function createContext (storageName = 'user', storageGetResult = null, storageSe
   const unusedStorage = storageName === 'user' ? 'device' : 'user'
   context.storage[unusedStorage] = {
     get: async () => null,
-    set: async () => null
+    set: async () => null,
+    del: async () => null
   }
 
   return context
 }
 
-function createCbContext (storageName = 'user', storageGetResult = null, storageSetHandler = null, storageGetHandler = null) {
+function createCbContext (storageName = 'user', storageGetResult = null, storageSetHandler = null, storageGetHandler = null, storageDelHandler = null) {
   const getCbHandler = (key, cb) => {
     cb(null, storageGetResult)
   }
-  const context = createContext(storageName, storageGetResult, storageSetHandler, storageGetHandler || getCbHandler)
+  const context = createContext(storageName, storageGetResult, storageSetHandler, storageGetHandler || getCbHandler, storageDelHandler)
   const unusedStorage = storageName === 'user' ? 'device' : 'user'
   context.storage[unusedStorage] = {
     get: (key, cb) => cb(),
-    set: (key, cb) => cb()
+    set: (key, cb) => cb(),
+    del: (key, cb) => cb()
   }
   return context
 }
