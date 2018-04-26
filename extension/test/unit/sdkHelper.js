@@ -72,10 +72,10 @@ function createContext (storageName = 'user', storageGetResult = null, storageSe
   context.log = {}
   context.log.info = () => {}
   context.log.error = () => {}
+  context.log.warn = () => {}
+  context.log.debug = () => {}
   context.storage[storageName] = {
-    get: async () => {
-      return storageGetResult
-    },
+    get: async () => storageGetResult,
     set: storageSetHandler,
     del: storageDelHandler
   }
