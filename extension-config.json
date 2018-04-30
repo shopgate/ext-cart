@@ -51,6 +51,12 @@
       "target": "checkout.cart"
     },
     {
+      "type": "portals",
+      "id": "CartItemProductAvailability",
+      "path": "frontend/Cart/components/Item/components/Product/components/Layout/components/Availability/index.jsx",
+      "target": "cart.item.name.after"
+    },
+    {
       "id": "en-US",
       "path": "frontend/locale/en-US.json",
       "type": "translations"
