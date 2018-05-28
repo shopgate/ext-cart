@@ -1,0 +1,35 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.cart.getCheckoutTotals.v1",
+    "public": true,
+    "input": [
+      {"key": "totals", "id": "11"}
+    ],
+    "output": [
+      {"key": "totals", "id": "11"}
+    ],
+    "steps": [
+      {
+        "type": "pipeline",
+        "id": "shopgate.cart.getCart.v1",
+        "input": [],
+        "output": [
+          {"key": "totals", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/checkout/getTotals.js",
+        "input": [
+          {"key": "cartTotals", "id": "20"},
+          {"key": "totals", "id": "11"}
+        ],
+        "output": [
+          {"key": "totals", "id": "11"}
+        ]
+      }
+    ]
+  }
+}
