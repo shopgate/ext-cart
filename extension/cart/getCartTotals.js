@@ -49,7 +49,7 @@ module.exports = function (context, input, cb) {
   if (couponsPercent || couponsFixed) {
     totals.push({
       label: null,
-      amount: couponsPercent + couponsFixed,
+      amount: -(couponsPercent + couponsFixed),
       type: 'discounts'
     })
   }
