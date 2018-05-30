@@ -1,4 +1,4 @@
-const CartError = require('./../errors/CartError')
+const CartError = require('./../common/Error/CartError')
 /**
  * @typedef {Object} CartGetCheckoutTotalsInput
  * @property {Object[]} cartTotals
