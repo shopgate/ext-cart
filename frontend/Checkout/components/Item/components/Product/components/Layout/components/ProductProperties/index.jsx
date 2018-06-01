@@ -1,6 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param {Object} props props
+ * @return {*}
+ */
 const Properties = ({ properties }) => (
   <ul>
     {properties.forEach(({ label, value }) => (
@@ -9,17 +14,17 @@ const Properties = ({ properties }) => (
       </li>
     ))}
   </ul>
-)
+);
 
 Properties.propTypes = {
   properties: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
-    value: PropTypes.string
-  }))
-}
+    value: PropTypes.string,
+  })),
+};
 
 Properties.defaultProps = {
-  properties: []
-}
+  properties: [],
+};
 
-export default Properties
+export default Properties;

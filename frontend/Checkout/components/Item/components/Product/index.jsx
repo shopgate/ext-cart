@@ -1,31 +1,24 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import Layout from './components/Layout'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Layout from './components/Layout';
 
-class Product extends Component {
-  static propTypes = {
-    currency: PropTypes.string.isRequired,
-    product: PropTypes.shape().isRequired,
-    quantity: PropTypes.number.isRequired
-  }
+/**
+ *
+ * @param {Object} props props
+ * @return {*}
+ */
+const Product = ({ currency, product, quantity }) => (
+  <Layout
+    product={product}
+    currency={currency}
+    quantity={quantity}
+  />
+);
 
-  static defaultProps = {
-    product: {}
-  }
+Product.propTypes = {
+  currency: PropTypes.string.isRequired,
+  product: PropTypes.shape().isRequired,
+  quantity: PropTypes.number.isRequired,
+};
 
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-      <Layout
-        product={this.props.product}
-        currency={this.props.currency}
-        quantity={this.props.quantity}
-      />
-    )
-  }
-}
-
-export default Product
+export default Product;

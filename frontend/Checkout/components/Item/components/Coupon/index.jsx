@@ -1,28 +1,22 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import Layout from './components/Layout'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Layout from './components/Layout';
 
-class Coupon extends Component {
-  static propTypes = {
-    coupon: PropTypes.shape().isRequired,
-    currency: PropTypes.string.isRequired
-  }
-  static defaultProps = {
-    coupon: {}
-  }
+/**
+ *
+ * @param {Object} props props
+ * @return {*}
+ */
+const Coupon = ({ currency, coupon }) => (
+  <Layout
+    coupon={coupon}
+    currency={currency}
+  />
+);
 
-  constructor(props) {
-    super(props)
-  }
+Coupon.propTypes = {
+  coupon: PropTypes.shape().isRequired,
+  currency: PropTypes.string.isRequired,
+};
 
-  render() {
-    return (
-      <Layout
-        coupon={this.props.coupon}
-        currency={this.props.currency}
-      />
-    )
-  }
-}
-
-export default Coupon
+export default Coupon;

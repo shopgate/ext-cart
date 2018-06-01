@@ -1,8 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Grid from '@shopgate/pwa-common/components/Grid'
-import styles from './style'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@shopgate/pwa-common/components/Grid';
+import styles from './style';
 
+/**
+ * @param {Object} props props
+ * @return {*}
+ */
 const Title = ({ value }) => (
   <Grid>
     <Grid.Item grow={1}>
@@ -11,13 +15,13 @@ const Title = ({ value }) => (
       </div>
     </Grid.Item>
   </Grid>
-)
+);
 
 Title.propTypes = {
-  value: PropTypes.string.isRequired
-}
+  value: PropTypes.string.isRequired,
+};
 
-Title.defaultProps = {}
-Title.contextTypes = {}
+Title.defaultProps = {};
+Title.contextTypes = {};
 
-export default Title
+export default Title;

@@ -54,7 +54,7 @@ describe('getCartTotals', () => {
       assert.equal(res.totals[0].type, 'subTotal')
       assert.equal(res.totals[0].amount, 100)
       assert.equal(res.totals[1].type, 'discounts')
-      assert.equal(res.totals[1].amount, 19)
+      assert.equal(res.totals[1].amount, -19)
       assert.equal(res.totals[2].type, 'grandTotal')
       assert.equal(res.totals[2].amount, 81)
       done()

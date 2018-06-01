@@ -1,5 +1,5 @@
-import React from 'react'
-import Icon from '@shopgate/pwa-common/components/Icon'
+import React from 'react';
+import Icon from '@shopgate/pwa-common/components/Icon';
 
 const content = `
   <defs>
@@ -61,8 +61,8 @@ const content = `
       <path class="cls-7" d="M4.854,9.927A4.918,4.918,0,0,1,0,4.963,4.918,4.918,0,0,1,4.854,0,4.918,4.918,0,0,1,9.709,4.963,4.918,4.918,0,0,1,4.854,9.927Z" transform="translate(13.802 13.584)"/>
     </g>
   </g>
-`
+`;
 
 export default () => (
-  <Icon viewBox='3548 7826 45.999 46' content={content} />
-)
+  <Icon viewBox="3548 7826 45.999 46" content={content} />
+);

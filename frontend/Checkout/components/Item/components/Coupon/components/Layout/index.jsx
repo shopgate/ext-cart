@@ -1,12 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Grid from '@shopgate/pwa-common/components/Grid'
-import Icon from './components/Icon'
-import Title from './components/Title'
-import Code from './components/Code'
-import styles from './style'
-import CouponPrice from './components/CouponPrice'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@shopgate/pwa-common/components/Grid';
+import Icon from './components/Icon';
+import Title from './components/Title';
+import Code from './components/Code';
+import styles from './style';
+import CouponPrice from './components/CouponPrice';
 
+/**
+ *
+ * @param {Object} props props
+ * @return {*}
+ */
 const Layout = ({ coupon, currency }) => (
   <Grid className={styles.item}>
     <Grid.Item className={styles.icon}>
@@ -20,15 +25,15 @@ const Layout = ({ coupon, currency }) => (
       <CouponPrice currency={currency} price={coupon.savedPrice} />
     </Grid.Item>
   </Grid>
-)
+);
 
 Layout.propTypes = {
   coupon: PropTypes.shape().isRequired,
-  currency: PropTypes.string.isRequired
-}
+  currency: PropTypes.string.isRequired,
+};
 
-Layout.defaultProps = {}
+Layout.defaultProps = {};
 
-Layout.contextTypes = {}
+Layout.contextTypes = {};
 
-export default Layout
+export default Layout;
