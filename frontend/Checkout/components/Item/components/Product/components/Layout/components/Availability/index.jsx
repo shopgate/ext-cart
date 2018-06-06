@@ -1,21 +1,25 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styles from './style'
+import React from 'react';
+import PropTypes from 'prop-types';
+import AvailabilityUi from '@shopgate/pwa-ui-shared/Availability';
 
+/**
+ * @param {Object} availability availability info
+ * @return {*}
+ */
 const Availability = ({ availability }) => (
-  <div className={styles.availability}>
-    <span className={styles[availability.state]}>{availability.text}</span>
-  </div>
-)
+  <AvailabilityUi
+    text={availability.text}
+    showWhenAvailable
+    state={availability.state}
+  />
+);
 
 Availability.propTypes = {
-  availability: PropTypes.shape()
-}
+  availability: PropTypes.shape(),
+};
 
 Availability.defaultProps = {
-  availability: {}
-}
+  availability: {},
+};
 
-Availability.contextTypes = {}
-
-export default Availability
+export default Availability;

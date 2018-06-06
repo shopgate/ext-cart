@@ -1,22 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import I18n from '@shopgate/pwa-common/components/I18n'
-import styles from './style'
+import React from 'react';
+import PropTypes from 'prop-types';
+import I18n from '@shopgate/pwa-common/components/I18n';
+import styles from './style';
 
+/**
+ *
+ * @param {Object} props props
+ * @return {*}
+ */
 const ProductQuantity = ({ quantity }) => (
   <div className={styles.quantity}>
-    <span><I18n.Text string='cart.item.quantity' />: {quantity}</span>
+    <span><I18n.Text string="cart.item.quantity" />: {quantity}</span>
   </div>
-)
+);
 
 ProductQuantity.propTypes = {
-  quantity: PropTypes.number
-}
+  quantity: PropTypes.number,
+};
 
 ProductQuantity.defaultProps = {
-  quantity: null
-}
+  quantity: null,
+};
 
-ProductQuantity.contextTypes = {}
+ProductQuantity.contextTypes = {};
 
-export default ProductQuantity
+export default ProductQuantity;

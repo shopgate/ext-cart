@@ -23,6 +23,12 @@ module.exports = async (context, input) => {
   const discounts = cartTotals.find(total => total.type === 'discounts')
   const subTotal = cartTotals.find(total => total.type === 'subTotal')
 
+  totals.push({
+    id: 'subtotal',
+    label: 'Subtotal',
+    amount: subTotal.amount
+  })
+
   if (discounts) {
     totals.push({
       id: 'discounts',
@@ -30,12 +36,6 @@ module.exports = async (context, input) => {
       amount: discounts.amount
     })
   }
-
-  totals.push({
-    id: 'subtotal',
-    label: 'Subtotal',
-    amount: subTotal.amount
-  })
 
   return {
     totals
