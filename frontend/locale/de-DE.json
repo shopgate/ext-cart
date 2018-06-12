@@ -4,6 +4,7 @@
       "quantity": "Anzahl"
     },
     "checkoutView": {
+      "title": "My Cart",
       "subTotal": "Subtotal",
       "items": "items"
     }

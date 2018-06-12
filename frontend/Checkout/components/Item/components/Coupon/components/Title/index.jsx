@@ -15,7 +15,7 @@ const Title = (props) => {
   }
 
   return (
-    <div className={styles}>
+    <div className={styles.title}>
       {title}
     </div>
   );
