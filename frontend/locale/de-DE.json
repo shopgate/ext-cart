@@ -2,6 +2,10 @@
   "cart": {
     "item": {
       "quantity": "Anzahl"
+    },
+    "checkoutView": {
+      "subTotal": "Subtotal",
+      "items": "items"
     }
   }
 }
