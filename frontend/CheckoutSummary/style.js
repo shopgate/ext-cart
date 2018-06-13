@@ -9,5 +9,4 @@ export const container = css({
   background: colors.light,
   fontSize: '14px',
   fontWeight: 500,
-  textTransform: 'lowercase',
 }).toString();

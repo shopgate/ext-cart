@@ -16,9 +16,7 @@ const CheckoutSummary = ({ quantity, subTotal }) => (
       <div className={style.container}>
         <Grid>
           <Grid.Item grow={1}>
-            {quantity} {' '}
-            <I18n.Text string="cart.checkoutView.items" /> {' '}
-            <I18n.Text string="cart.checkoutView.subTotal" />
+            <I18n.Text string="cart.checkoutView.summaryRow" params={{ quantity }} />
           </Grid.Item>
           <Grid.Item grow={0}>
             <I18n.Price price={subTotal} currency={checkout.currency} />

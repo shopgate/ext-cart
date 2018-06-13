@@ -4,9 +4,8 @@
       "quantity": "Anzahl"
     },
     "checkoutView": {
-      "title": "My Cart",
-      "subTotal": "Subtotal",
-      "items": "items"
+      "title": "Mein Warenkorb",
+      "summaryRow": "{quantity} Artikel, Zwischensumme"
     }
   }
 }

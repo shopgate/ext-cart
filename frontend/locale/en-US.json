@@ -5,8 +5,7 @@
     },
     "checkoutView": {
       "title": "My Cart",
-      "subTotal": "Subtotal",
-      "items": "items"
+      "summaryRow": "{quantity} {quantity, plural, =1 {item} other {items}}, subtotal"
     }
   }
 }
