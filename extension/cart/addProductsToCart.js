@@ -4,18 +4,24 @@ const EmptyInput = require('../common/Error/EmptyInput')
 const CartItemId = require('./CartItemId')
 
 /**
+ * @typedef {Object} AddCartItemOption
+ * @property {string} type select|input
+ * @property {string} id
+ * @property {string} value
+ *
  * @typedef {Object} AddCartItem
  * @property {string} productId
  * @property {number} quantity
  * @property {string} id
  * @property {string} type
+ * @property {AddCartItemOption[]} options
  */
 
 /**
  * @param {SDKContext} context
  * @param {Object} input
  * @param {AddCartItem[]} input.products
- * @param {AddCartItem[]} input.cartStorageName
+ * @param {string} input.cartStorageName
  * @param {Object[]} input.catalogProducts
  */
 module.exports = async (context, input) => {
@@ -97,9 +103,11 @@ function addProductToCart (cart, product, productInfo) {
       price: {
         unit: productInfo.price.unitPrice,
         default: productInfo.price.unitPrice * product.quantity,
-        special: null
+        special: productInfo.price.unitPriceStriked * product.quantity
       },
-      properties: [],
+      properties: [
+        /* @TODO get from product info and selected valiant and options */
+      ],
       appliedDiscounts: [],
       additionalInfo: {
         availability: productInfo.availability

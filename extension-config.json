@@ -46,6 +46,12 @@
     },
     {
       "type": "portals",
+      "id": "CartCheckoutSummary",
+      "path": "frontend/CheckoutSummary/index.jsx",
+      "target": "checkout.before"
+    },
+    {
+      "type": "portals",
       "id": "CartCheckout",
       "path": "frontend/Checkout/index.jsx",
       "target": "checkout.cart"

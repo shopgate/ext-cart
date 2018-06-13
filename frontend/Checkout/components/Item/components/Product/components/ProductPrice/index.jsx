@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import I18n from '@shopgate/pwa-common/components/I18n';
-import styles from './style';
+import Price from '@shopgate/pwa-ui-shared/Price';
+import PriceStriked from '@shopgate/pwa-ui-shared/PriceStriked';
 
 /**
  * @param {Object} props props
  * @return {*}
  */
 const ProductPrice = ({ currency, defaultPrice, specialPrice }) => (
-  <div className={styles.quantity}>
-    <I18n.Price
-      price={specialPrice === 0 ? 0 : (specialPrice || defaultPrice)}
+  <Fragment>
+    {!!specialPrice && (
+      <Fragment>
+        <PriceStriked
+          value={defaultPrice}
+          currency={currency}
+        />
+      </Fragment>
+    )}
+    <Price
       currency={currency}
+      discounted={!!specialPrice}
+      unitPrice={specialPrice || defaultPrice}
     />
-  </div>
+  </Fragment>
 );
 
 ProductPrice.propTypes = {

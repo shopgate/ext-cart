@@ -2,6 +2,10 @@
   "cart": {
     "item": {
       "quantity": "Quantity"
+    },
+    "checkoutView": {
+      "title": "My Cart",
+      "summaryRow": "{quantity} {quantity, plural, =1 {item} other {items}}, subtotal"
     }
   }
 }

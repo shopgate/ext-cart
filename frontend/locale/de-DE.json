@@ -2,6 +2,10 @@
   "cart": {
     "item": {
       "quantity": "Anzahl"
+    },
+    "checkoutView": {
+      "title": "Mein Warenkorb",
+      "summaryRow": "{quantity} Artikel, Zwischensumme"
     }
   }
 }

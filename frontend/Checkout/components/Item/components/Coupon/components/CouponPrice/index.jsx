@@ -4,7 +4,7 @@ import I18n from '@shopgate/pwa-common/components/I18n';
 import {
   COUPON_TYPE_FIXED,
   COUPON_TYPE_PERCENT,
-} from './../../../../../../../../../constants';
+} from './../../../../../../../constants';
 import styles from './style';
 
 /**
