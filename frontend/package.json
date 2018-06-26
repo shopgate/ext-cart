@@ -15,6 +15,7 @@
     "lint": "eslint --ignore-path ../.gitignore --ext .js --ext .jsx ."
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
     "@shopgate/pwa-core": "latest",
     "@shopgate/pwa-common": "latest",
     "@shopgate/pwa-common-commerce": "latest",

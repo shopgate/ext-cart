@@ -13,8 +13,8 @@
     "standard": "./node_modules/.bin/standard"
   },
   "license": "Apache-2.0",
-  "dependencies": {},
   "devDependencies": {
+    "standard": "latest",
     "mocha": "^3.2.0",
     "mocha-jenkins-reporter": "^0.3.7",
     "nyc": "latest"
