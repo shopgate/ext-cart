@@ -4,8 +4,7 @@ import { themeConfig } from '@shopgate/pwa-common/helpers/config';
 const { variables, colors } = themeConfig;
 
 export const title = css({
-  background: colors.light,
-  padding: `${variables.gap.bigger}px ${variables.gap.big}px ${variables.gap.small}px`,
-  textTransform: 'uppercase',
+  background: colors.background,
+  padding: variables.gap.big,
   fontWeight: 500,
 }).toString();
