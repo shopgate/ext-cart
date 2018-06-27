@@ -7,5 +7,11 @@
       "title": "My Cart",
       "summaryRow": "{quantity} {quantity, plural, =1 {item} other {items}}, subtotal"
     }
+  },
+  "checkout": {
+    "totals": {
+      "subtotal": "Subtotal",
+      "discounts": "Discounts"
+    }
   }
 }

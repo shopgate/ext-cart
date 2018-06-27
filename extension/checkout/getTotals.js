@@ -25,14 +25,12 @@ module.exports = async (context, input) => {
 
   totals.push({
     id: 'subtotal',
-    label: 'Subtotal',
     amount: subTotal.amount
   })
 
   if (discounts) {
     totals.push({
       id: 'discounts',
-      label: 'Discounts',
       amount: discounts.amount
     })
   }
