@@ -1,4 +1,5 @@
 import { main$ } from '@shopgate/pwa-common/streams/main';
+import { cartReceived$ } from '@shopgate/pwa-common-commerce/cart/streams';
 import { getCartItems } from '@shopgate/pwa-common-commerce/cart/selectors';
 import fetchCart from '@shopgate/pwa-common-commerce/cart/actions/fetchCart';
 import { ITEM_TYPE_PRODUCT, ITEM_TYPE_COUPON } from './../constants';
@@ -48,14 +49,20 @@ export default (subscribe) => {
   const checkoutEnter$ = main$.filter(({ action }) => action.type === 'CHECKOUT_ENTER');
   const checkoutSuccess$ = main$.filter(({ action }) => action.type === 'CHECKOUT_SUCCESS');
 
-  subscribe(checkoutEnter$, ({ dispatch, getState }) => {
-    const checkoutData = mapCartItemsToCheckoutData(getCartItems(getState()));
+  /**
+   * Update cart info on entering checkout
+   * or when cart data received during checkout
+   */
+  const checkoutEnterOrCartReceived$ = checkoutEnter$.merge(cartReceived$);
+
+  subscribe(checkoutEnterOrCartReceived$, ({ dispatch, getState }) => {
+    const data = mapCartItemsToCheckoutData(getCartItems(getState()));
     // Inject cart data into checkout when present
-    if (checkoutData.length) {
+    if (data.length) {
       dispatch({
         type: 'CHECKOUT_DATA',
         id: 'items',
-        data: mapCartItemsToCheckoutData(getCartItems(getState())),
+        data,
       });
     }
   });
