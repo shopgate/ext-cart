@@ -67,7 +67,11 @@ module.exports = function (context, input, cb) {
           loop.stop = true
         }
       } else {
-        messages.push(`Coupon ${couponCode} is invalid`)
+        messages.push({
+          code: 'EUNKNOWN',
+          message: `Coupon ${couponCode} is invalid`,
+          type: 'error'
+        })
       }
     })
 
