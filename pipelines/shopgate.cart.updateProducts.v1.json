@@ -4,6 +4,7 @@
     "id": "shopgate.cart.updateProducts.v1",
     "public": true,
     "input": [
+      {"key": "sgxsMeta", "id": "1000"},
       {"key": "CartItem", "id": "1020"}
     ],
     "output": [
@@ -22,8 +23,43 @@
       {
         "type": "extension",
         "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/getCartItems.js",
+        "input": [
+          {"key": "cartStorageName", "id": "1040"}
+        ],
+        "output": [
+          {"key": "cartItems", "id": "1060"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
+        "path": "@shopgate/cart/cart/findProductIds.js",
+        "input": [
+          {"key": "cartItems", "id": "1060"},
+          {"key": "updateItems", "id": "1020"}
+        ],
+        "output": [
+          {"key": "productIds", "id": "1021"}
+        ]
+      },
+      {
+        "type": "pipeline",
+        "id": "shopgate.catalog.getProducts.v1",
+        "input": [
+          {"key": "sgxsMeta", "id": "1000"},
+          {"key": "productIds", "id": "1021"}
+        ],
+        "output": [
+          {"key": "products", "id": "1022"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/cart",
         "path": "@shopgate/cart/cart/updateProductsInCart.js",
         "input": [
+          {"key": "catalogProducts", "id": "1022"},
           {"key": "updateItems", "id": "1020", "optional": true},
           {"key": "cartStorageName", "id": "1040"}
         ],
