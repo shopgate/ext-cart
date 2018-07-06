@@ -21,7 +21,12 @@ module.exports = async (context, input) => {
 
   // calculate sub total for items
   const discounts = cartTotals.find(total => total.type === 'discounts')
-  const subTotal = cartTotals.find(total => total.type === 'subTotal')
+  let subTotal = cartTotals.find(total => total.type === 'subTotal')
+
+  // Show original subTotal on checkout overview
+  if (discounts) {
+    subTotal.amount += Math.abs(discounts.amount)
+  }
 
   totals.push({
     id: 'subtotal',
