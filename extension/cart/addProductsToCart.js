@@ -92,6 +92,13 @@ function findProduct (cart, product) {
  * @param {Object} productInfo single product from getProducts pipeline
  */
 function addProductToCart (cart, product, productInfo) {
+  let defaultPrice = productInfo.price.unitPrice * product.quantity
+  let specialPrice = null
+  if (productInfo.price.unitPriceStriked) {
+    defaultPrice = productInfo.price.unitPriceStriked * product.quantity
+    specialPrice = productInfo.price.unitPrice * product.quantity
+  }
+
   const newCartItem = {
     id: getCartItemId(product),
     quantity: product.quantity,
@@ -102,8 +109,8 @@ function addProductToCart (cart, product, productInfo) {
       featuredImageUrl: productInfo.featuredImageUrl,
       price: {
         unit: productInfo.price.unitPrice,
-        default: productInfo.price.unitPrice * product.quantity,
-        special: productInfo.price.unitPriceStriked * product.quantity
+        default: defaultPrice,
+        special: specialPrice
       },
       properties: [
         /* @TODO get from product info and selected valiant and options */

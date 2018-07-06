@@ -12,7 +12,7 @@ module.exports = function (context, input, cb) {
 
   const subTotal = cartItems
     .filter(item => item.type === PRODUCT)
-    .map(item => item.product.price.default)
+    .map(item => item.product.price.special || item.product.price.default)
     .reduce(
       (sum, amount) => sum + amount,
       0
