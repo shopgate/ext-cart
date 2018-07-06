@@ -10,7 +10,7 @@ const {PRODUCT, COUPON, COUPON_PERCENT, COUPON_FIXED} = require('../common/const
 module.exports = function (context, input, cb) {
   const cartItems = input.cartItems
 
-  const subTotal = cartItems
+  let subTotal = cartItems
     .filter(item => item.type === PRODUCT)
     .map(item => item.product.price.special || item.product.price.default)
     .reduce(
@@ -18,9 +18,7 @@ module.exports = function (context, input, cb) {
       0
     )
 
-  let total = subTotal
-
-  const couponsFixed = cartItems
+  const absDiscount = cartItems
     .filter(item => item.type === COUPON)
     .filter(item => item.coupon.savedPrice.type === COUPON_FIXED)
     .map(item => item.coupon.savedPrice.value)
@@ -28,17 +26,21 @@ module.exports = function (context, input, cb) {
       (sum, amount) => sum + amount,
       0
     )
-  total -= couponsFixed
 
-  const couponsPercent = cartItems
+  // Extract absolute discounts
+  subTotal -= absDiscount
+
+  const relativeDiscount = cartItems
     .filter(item => item.type === COUPON)
     .filter(item => item.coupon.savedPrice.type === COUPON_PERCENT)
     .map(item => item.coupon.savedPrice.value)
     .reduce(
-      (sum, percent) => sum + (total * (percent / 100)),
+      (sum, percent) => sum + (subTotal * (percent / 100)),
       0
     )
-  total -= couponsPercent
+
+  // Extract relative discounts
+  subTotal -= relativeDiscount
 
   const totals = []
   totals.push({
@@ -46,16 +48,16 @@ module.exports = function (context, input, cb) {
     amount: subTotal,
     type: 'subTotal'
   })
-  if (couponsPercent || couponsFixed) {
+  if (relativeDiscount || absDiscount) {
     totals.push({
       label: null,
-      amount: -(couponsPercent + couponsFixed),
+      amount: -(absDiscount + relativeDiscount),
       type: 'discounts'
     })
   }
   totals.push({
     label: null,
-    amount: total,
+    amount: subTotal,
     type: 'grandTotal'
   })
 
