@@ -11,12 +11,12 @@
     "lint": "eslint --ignore-path ../.gitignore --ext .js --ext .jsx ."
   },
   "devDependencies": {
-    "@shopgate/pwa-core": "5.7.3",
-    "@shopgate/pwa-common": "5.7.3",
-    "@shopgate/pwa-common-commerce": "5.7.3",
-    "@shopgate/pwa-ui-shared": "5.7.3",
+    "@shopgate/pwa-core": "5.8.0-beta.6",
+    "@shopgate/pwa-common": "5.8.0-beta.6",
+    "@shopgate/pwa-common-commerce": "5.8.0-beta.6",
+    "@shopgate/pwa-ui-shared": "5.8.0-beta.6",
     "@shopgate/react-hammerjs": "^0.5.3",
-    "@shopgate/eslint-config": "5.7.3",
+    "@shopgate/eslint-config": "5.8.0-beta.6",
     "eslint": "^4.17.0",
     "glamor": "^2.20.40",
     "react": "^16.3.2",
