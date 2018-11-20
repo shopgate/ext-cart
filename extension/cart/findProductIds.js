@@ -4,7 +4,7 @@
  * @return {Promise<{productIds: string[]}>}
  */
 module.exports = async (context, input) => {
-  const updateIds = input.updateItems.map(item => item.CartItemId)
+  const updateIds = input.updateItems.map(item => item.cartItemId)
 
   const productIds = input.cartItems
     .filter(cartItem => updateIds.includes(cartItem.id))

@@ -58,7 +58,7 @@ describe('updateProductsInCart', () => {
       ],
       updateItems: [
         {
-          CartItemId: 'qwerty123',
+          cartItemId: 'qwerty123',
           quantity: 2
         }
       ],
@@ -90,7 +90,7 @@ describe('updateProductsInCart', () => {
       ],
       updateItems: [
         {
-          CartItemId: 'qwerty123',
+          cartItemId: 'qwerty123',
           quantity: 0
         }
       ],
