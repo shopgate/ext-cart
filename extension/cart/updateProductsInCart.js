@@ -3,7 +3,7 @@ const { PRODUCT } = require('../common/consts')
 
 /**
  * @typedef {Object} UpdateCartItem
- * @property {string} CartItemId
+ * @property {string} cartItemId
  * @property {number} quantity
  */
 
@@ -29,7 +29,7 @@ module.exports = function (context, input, cb) {
 
     // Filter out unknown entries
     const updateItems = input.updateItems.filter(item => {
-      return !!cart.find(cartItem => cartItem.id === item.CartItemId)
+      return !!cart.find(cartItem => cartItem.id === item.cartItemId)
     })
 
     // Update is empty
@@ -40,7 +40,7 @@ module.exports = function (context, input, cb) {
     cart = cart
       // 1. Update quantities for cart items by input
       .map(cartItem => {
-        const updateItem = updateItems.find(updateItem => cartItem.id === updateItem.CartItemId)
+        const updateItem = updateItems.find(updateItem => cartItem.id === updateItem.cartItemId)
         if (updateItem) {
           cartItem.quantity = updateItem.quantity
         }

@@ -1,5 +1,5 @@
 {
-  "version": "2.2.1-beta.3",
+  "version": "3.0.0-alpha.1",
   "id": "@shopgate/cart",
   "configuration": {
     "currency" : {

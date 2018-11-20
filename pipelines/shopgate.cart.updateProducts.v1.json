@@ -5,7 +5,7 @@
     "public": true,
     "input": [
       {"key": "sgxsMeta", "id": "1000"},
-      {"key": "CartItem", "id": "1020"}
+      {"key": "cartItem", "id": "1020"}
     ],
     "output": [
       {"key": "messages", "id": "1030", "optional": true}
